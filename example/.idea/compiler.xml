@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="example" />
+        <module name="lujproto" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="example" target="1.5" />
+      <module name="lujproto" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
