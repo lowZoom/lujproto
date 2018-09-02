@@ -13,9 +13,10 @@ final class ProtoSessionFactoryImpl implements ProtoSessionFactory {
 
   @Override
   public ProtoSession create(ApplicationContext springContext) {
-    ProtoMetaMap metaMap = null;// _mapFactory.create(springContext);
-    ProtoObjectCreator creator = _creatorFactory.create(metaMap);
+    ProtoMetaMapFactory.BeanMap beanMap = new BeanMapFromSpring(springContext);
+    ProtoMetaMap metaMap = _mapFactory.create(beanMap);
 
+    ProtoObjectCreator creator = _creatorFactory.create(metaMap);
     return new ProtoSessionImpl(creator);
   }
 
