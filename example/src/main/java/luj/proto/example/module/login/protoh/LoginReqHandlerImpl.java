@@ -1,7 +1,7 @@
-package luj.proto.example.login.protoh;
+package luj.proto.example.module.login.protoh;
 
 import luj.proto.api.ProtoSession;
-import luj.proto.example.login.proto.LoginReq;
+import luj.proto.example.module.login.proto.LoginReq;
 
 final class LoginReqHandlerImpl implements LoginReqHandler {
 

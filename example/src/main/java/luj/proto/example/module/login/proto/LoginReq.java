@@ -1,4 +1,4 @@
-package luj.proto.example.login.proto;
+package luj.proto.example.module.login.proto;
 
 import luj.data.type.JStr;
 import luj.proto.anno.Proto;

@@ -1,20 +1,28 @@
 package luj.proto.example;
 
-import luj.proto.example.login.ui.LoginUi;
+import luj.proto.example.module.login.ui.LoginUi;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
-public final class Main {
+@ComponentScan("luj.proto.example")
+final class Main {
 
   public static void main(String[] args) {
-    new Main(LoginUi.create()).start();
+
+    try (AnnotationConfigApplicationContext appCtx =
+        new AnnotationConfigApplicationContext(Main.class)) {
+      new Main(appCtx).start();
+    }
   }
 
-  private Main(LoginUi loginUi) {
-    _loginUi = loginUi;
+  private Main(ApplicationContext springContext) {
+    _springContext = springContext;
   }
 
   private void start() {
-    _loginUi.show();
+    LoginUi.create(_springContext).show();
   }
 
-  private final LoginUi _loginUi;
+  private final ApplicationContext _springContext;
 }

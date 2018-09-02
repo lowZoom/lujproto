@@ -1,4 +1,4 @@
-package luj.proto.example.login.protoh;
+package luj.proto.example.module.login.protoh;
 
 import luj.proto.api.ProtoSession;
 

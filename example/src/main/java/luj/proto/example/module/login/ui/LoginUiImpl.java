@@ -1,9 +1,9 @@
-package luj.proto.example.login.ui;
+package luj.proto.example.module.login.ui;
 
 import java.util.Scanner;
 import luj.proto.api.ProtoSession;
-import luj.proto.example.login.proto.LoginReq;
-import luj.proto.example.login.protoh.LoginReqHandler;
+import luj.proto.example.module.login.proto.LoginReq;
+import luj.proto.example.module.login.protoh.LoginReqHandler;
 
 final class LoginUiImpl implements LoginUi {
 
