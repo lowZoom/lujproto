@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="example" />
         <module name="lujproto" />
+        <module name="lujproto-compiler" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="example" target="1.8" />
       <module name="lujproto" target="1.8" />
+      <module name="lujproto-compiler" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

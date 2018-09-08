@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/example.iml" filepath="$PROJECT_DIR$/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujproto.iml" filepath="$PROJECT_DIR$/.idea/lujproto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lujproto-compiler.iml" filepath="$PROJECT_DIR$/.idea/lujproto-compiler.iml" />
     </modules>
   </component>
 </project>
