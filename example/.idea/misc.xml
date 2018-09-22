@@ -14,12 +14,17 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujparent/lujparent/pom.xml" />
         <option value="$PROJECT_DIR$/../lujproto/pom.xml" />
         <option value="$PROJECT_DIR$/../lujproto-compiler/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujdata/lujdata/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujava/lujava/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujtest/lujtest/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujgenerate/lujgenerate/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

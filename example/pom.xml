@@ -16,12 +16,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>luj.ava</groupId>
-      <artifactId>lujava</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
       <groupId>luj.proto</groupId>
       <artifactId>lujproto</artifactId>
       <version>0.1-SNAPSHOT</version>
@@ -31,7 +25,7 @@
       <groupId>luj.proto</groupId>
       <artifactId>lujproto-compiler</artifactId>
       <version>0.1-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
-
 </project>

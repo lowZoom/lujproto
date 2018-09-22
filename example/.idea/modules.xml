@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/example.iml" filepath="$PROJECT_DIR$/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/example.iml" filepath="$PROJECT_DIR$/.idea/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lujava.iml" filepath="$PROJECT_DIR$/.idea/lujava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lujdata.iml" filepath="$PROJECT_DIR$/.idea/lujdata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lujgenerate.iml" filepath="$PROJECT_DIR$/.idea/lujgenerate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lujparent.iml" filepath="$PROJECT_DIR$/.idea/lujparent.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujproto.iml" filepath="$PROJECT_DIR$/.idea/lujproto.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujproto-compiler.iml" filepath="$PROJECT_DIR$/.idea/lujproto-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lujtest.iml" filepath="$PROJECT_DIR$/.idea/lujtest.iml" />
     </modules>
   </component>
 </project>
