@@ -1,12 +1,20 @@
 package luj.proto.anno.proc.proto.protobuf;
 
+import javax.lang.model.element.TypeElement;
+import luj.generate.annotation.processing.AnnoProc;
+import luj.generate.annotation.processing.SingleAnnoProc;
+
 public interface ProtoFileGenerator {
 
-  interface ProtoType {
+  interface Factory {
 
-    String getTypeName();
+    static ProtoFileGenerator create(SingleAnnoProc.Context ctx) {
+      TypeElement elem = ctx.getProcessingType().toElement();
+      AnnoProc.Log log = ctx.getLogger();
 
-    void saveToFile(String path);
+      ProtoTypeImpl protoType = new ProtoTypeImpl(elem, log);
+      return new ProtoFileGeneratorImpl(protoType);
+    }
   }
 
   void generate();

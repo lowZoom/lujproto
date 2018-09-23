@@ -2,6 +2,13 @@ package luj.proto.anno.proc.proto.protobuf;
 
 final class ProtoFileGeneratorImpl implements ProtoFileGenerator {
 
+  interface ProtoType {
+
+    String getTypeName();
+
+    void saveToFile(String path);
+  }
+
   ProtoFileGeneratorImpl(ProtoType protoType) {
     _protoType = protoType;
   }

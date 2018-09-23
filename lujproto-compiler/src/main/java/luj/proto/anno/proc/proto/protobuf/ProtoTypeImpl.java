@@ -1,9 +1,9 @@
 package luj.proto.anno.proc.proto.protobuf;
 
 import javax.lang.model.element.TypeElement;
-import luj.ava.annotation.AnnoProc;
+import luj.generate.annotation.processing.AnnoProc;
 
-final class ProtoTypeImpl implements ProtoFileGenerator.ProtoType {
+final class ProtoTypeImpl implements ProtoFileGeneratorImpl.ProtoType {
 
   ProtoTypeImpl(TypeElement elem, AnnoProc.Log log) {
     _elem = elem;
