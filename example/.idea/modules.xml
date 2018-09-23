@@ -3,13 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/example.iml" filepath="$PROJECT_DIR$/.idea/example.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/lujava.iml" filepath="$PROJECT_DIR$/.idea/lujava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/lujdata.iml" filepath="$PROJECT_DIR$/.idea/lujdata.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/lujgenerate.iml" filepath="$PROJECT_DIR$/.idea/lujgenerate.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/lujparent.iml" filepath="$PROJECT_DIR$/.idea/lujparent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujava.iml" filepath="$PROJECT_DIR$/.idea/luj.lujava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujdata.iml" filepath="$PROJECT_DIR$/.idea/luj.lujdata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujgenerate.iml" filepath="$PROJECT_DIR$/.idea/luj.lujgenerate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujparent.iml" filepath="$PROJECT_DIR$/.idea/luj.lujparent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujtest.iml" filepath="$PROJECT_DIR$/.idea/luj.lujtest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujproto.iml" filepath="$PROJECT_DIR$/.idea/lujproto.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujproto-compiler.iml" filepath="$PROJECT_DIR$/.idea/lujproto-compiler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/lujtest.iml" filepath="$PROJECT_DIR$/.idea/lujtest.iml" />
     </modules>
   </component>
 </project>
