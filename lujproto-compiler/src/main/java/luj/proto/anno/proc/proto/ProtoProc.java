@@ -1,9 +1,10 @@
 package luj.proto.anno.proc.proto;
 
 import com.google.auto.service.AutoService;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import javax.annotation.processing.Processor;
-import luj.generate.annotation.processing.SingleAnnoProc;
+import luj.generate.annotation.process.SingleAnnoProc;
 import luj.proto.anno.Proto;
 import luj.proto.anno.proc.proto.protobuf.ProtoFileGenerator;
 
@@ -16,7 +17,7 @@ public final class ProtoProc extends SingleAnnoProc {
   }
 
   @Override
-  public void processElement(Context ctx) {
+  public void processElement(Context ctx) throws IOException {
     ProtoFileGenerator generator = ProtoFileGenerator.Factory.create(ctx);
     generator.generate();
   }
