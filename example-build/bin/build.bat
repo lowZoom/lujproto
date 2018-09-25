@@ -1,4 +1,3 @@
-@REM
 @ECHO OFF
 
 SET BUILD=%~dp0
@@ -20,9 +19,9 @@ SET GROOVY_ZIP=%ENV_TEMP%\groovy.zip
 %WGET_EXE% http://dl.bintray.com/groovy/maven/apache-groovy-binary-2.4.15.zip -O %GROOVY_ZIP%
 
 ECHO 安装Groovy运行时...
-%UNZIP_EXE% %GROOVY_ZIP% -d %ENV_TEMP%
+%UNZIP_EXE% %GROOVY_ZIP% -d %BUILD_ENV%
 
-FOR /D %%G IN (%ENV_TEMP%\groovy-*) DO SET GROOVY_EXE=%%G\bin\groovy.bat
+FOR /D %%G IN (%BUILD_ENV%\groovy-*) DO SET GROOVY_EXE=%%G\bin\groovy.bat
 ECHO %GROOVY_EXE%
 
 ECHO 运行构建脚本...
