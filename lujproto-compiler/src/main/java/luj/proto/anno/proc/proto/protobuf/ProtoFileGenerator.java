@@ -1,9 +1,9 @@
 package luj.proto.anno.proc.proto.protobuf;
 
 import java.io.IOException;
+import javax.lang.model.element.TypeElement;
 import luj.generate.annotation.process.ProcType;
 import luj.generate.annotation.process.SingleAnnoProc;
-import luj.generate.annotation.process.file.ResourceFiler;
 
 public interface ProtoFileGenerator {
 
@@ -11,12 +11,12 @@ public interface ProtoFileGenerator {
 
     static ProtoFileGenerator create(SingleAnnoProc.Context ctx) {
       ProcType processingType = ctx.getProcessingType();
-      ResourceFiler filer = ResourceFiler.from(ctx.getFiler());
+      TypeElement elem = processingType.toElement();
 
-      ProtoTypeImpl protoType = new ProtoTypeImpl(processingType,
-          processingType.toElement(), ctx.getLogger(), filer);
+      MessageImpl message = new MessageImpl(processingType.getPackageName(),
+          elem.getSimpleName().toString(), elem, ctx.getFiler(), ctx.getLogger());
 
-      return new ProtoFileGeneratorImpl(protoType);
+      return new ProtoFileGeneratorImpl(message);
     }
   }
 

@@ -1,26 +1,65 @@
 package luj.proto.anno.proc.proto.protobuf;
 
+import java.io.Closeable;
 import java.io.IOException;
+import java.util.List;
 
 final class ProtoFileGeneratorImpl implements ProtoFileGenerator {
 
-  interface ProtoType {
+  public interface ProtobufMessage {
 
-    String getTypeName();
+    String getSyntax();
 
-    void saveToFile(String path) throws IOException;
+    String getPackage();
+
+    String getMessageName();
+
+    List<MessageField> getFieldList();
+
+    ProtoWriter openWriter() throws IOException;
   }
 
-  ProtoFileGeneratorImpl(ProtoType protoType) {
+  interface MessageField {
+
+    String getType();
+
+    String getName();
+  }
+
+  interface ProtoWriter extends Closeable {
+
+    void line(String format, Object... args) throws IOException;
+
+    void line() throws IOException;
+  }
+
+  ProtoFileGeneratorImpl(ProtobufMessage protoType) {
     _protoType = protoType;
   }
 
   @Override
   public void generate() throws IOException {
-    String typeName = _protoType.getTypeName();
+    ProtobufMessage message = _protoType;
+    try (ProtoWriter writer = message.openWriter()) {
+      writeProto(writer, message);
+    }
 
-    _protoType.saveToFile(typeName + ".proto");
+//    _protoType.saveToFile(typeName + ".proto");
   }
 
-  private final ProtoType _protoType;
+  private void writeProto(ProtoWriter writer, ProtobufMessage message) throws IOException {
+    writer.line("syntax=\"%s\";", message.getSyntax());
+    writer.line();
+
+    writer.line("package %s;", message.getPackage());
+    writer.line();
+
+    writer.line("message %s {", message.getMessageName());
+
+//    message.getFieldList()
+
+    writer.line("}");
+  }
+
+  private final ProtobufMessage _protoType;
 }
