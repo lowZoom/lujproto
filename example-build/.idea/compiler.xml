@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Groovy-Eclipse" />
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -9,5 +10,8 @@
         <module name="lujproto-example-build" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="GreclipseSettings">
+    <option name="greclipsePath" value="$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-eclipse-batch/2.4.15-01/groovy-eclipse-batch-2.4.15-01.jar" />
   </component>
 </project>
