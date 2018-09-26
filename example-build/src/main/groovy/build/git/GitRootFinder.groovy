@@ -1,7 +1,9 @@
 package build.git
 
 import core.AutoCtor
+import groovy.transform.PackageScope
 
+@PackageScope
 @AutoCtor
 class GitRootFinder {
 
@@ -12,7 +14,6 @@ class GitRootFinder {
       if (isGitRoot(fileCursor)) {
         return fileCursor
       }
-
       fileCursor = fileCursor.parentFile
     }
 
