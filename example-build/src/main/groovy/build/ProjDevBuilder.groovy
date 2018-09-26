@@ -1,15 +1,16 @@
 package build
 
 import build.clean.BuildEnvCleaner
+import build.git.AllModuleCloner
 import core.AutoCtor
-
-import java.nio.file.Paths
 
 @AutoCtor
 class ProjDevBuilder {
 
   void build() {
-    new BuildEnvCleaner(Paths.get(_buildPath, 'env').toString()).clean()
+    new BuildEnvCleaner(_buildPath).clean()
+
+    new AllModuleCloner(_buildPath).cloneAll()
   }
 
   private String _buildPath

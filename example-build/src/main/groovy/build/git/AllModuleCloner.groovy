@@ -5,8 +5,12 @@ import core.AutoCtor
 @AutoCtor
 class AllModuleCloner {
 
+  void cloneAll() {
+    File buildGit = new GitRootFinder(_buildPath).find()
+    String projRoot = buildGit.parentFile.absolutePath
 
+    println(projRoot)
+  }
 
-
-  String _buildPath
+  private String _buildPath
 }

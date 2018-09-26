@@ -25,5 +25,5 @@ class GitRootFinder {
         .findAll { it.name == '.git' }
   }
 
-  String _startPath
+  private String _startPath
 }
