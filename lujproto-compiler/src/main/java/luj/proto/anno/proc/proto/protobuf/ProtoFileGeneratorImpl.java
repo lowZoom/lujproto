@@ -56,7 +56,11 @@ final class ProtoFileGeneratorImpl implements ProtoFileGenerator {
 
     writer.line("message %s {", message.getMessageName());
 
-//    message.getFieldList()
+    List<MessageField> fieldList = message.getFieldList();
+    for (int i = 0, n = fieldList.size(); i < n; i++) {
+      MessageField field = fieldList.get(i);
+      writer.line("%s %s = %s;", field.getType(), field.getName(), i);
+    }
 
     writer.line("}");
   }
