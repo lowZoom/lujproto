@@ -19,8 +19,9 @@ class GitCloneTo {
   }
 
   private String getDirName(String url) {
-    String urlBase = url.replaceFirst('/+$', '').split('/')[-1]
-    return urlBase.split(/\./, 2)[0]
+    return url.replaceFirst('/+$', '')
+        .replaceFirst(/\.git$/, '')
+        .split('/')[-1]
   }
 
   private String _projRoot

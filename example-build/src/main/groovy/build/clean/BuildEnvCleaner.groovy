@@ -1,6 +1,7 @@
 package build.clean
 
 import core.AutoCtor
+import core.ant.AntCmd
 
 import java.nio.file.Paths
 
@@ -10,7 +11,7 @@ class BuildEnvCleaner {
   void clean() {
     String tempPath = Paths.get(_buildPath, 'env', 'temp')
 
-    new AntBuilder().with {
+    AntCmd.create().with {
       echo('清理构建环境...')
       delete(dir: tempPath, verbose: 'true')
     }

@@ -25,6 +25,7 @@ FOR /D %%G IN (%BUILD_ENV%\groovy-*) DO SET GROOVY_EXE=%%G\bin\groovy.bat
 ECHO %GROOVY_EXE%
 
 ECHO 运行构建脚本...
-CALL %GROOVY_EXE% %BUILD%..\src\main\groovy\Main.groovy
+SET CLASSPATH=%BUILD%..\src\main\groovy
+CALL %GROOVY_EXE% -cp "%CLASSPATH%" "%CLASSPATH%\Main.groovy" %BUILD%
 
 PAUSE
