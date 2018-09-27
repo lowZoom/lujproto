@@ -9,6 +9,9 @@ import java.nio.charset.StandardCharsets
 @AutoCtor
 class CmdImpl extends AntCmd {
 
+  /**
+   * 让windows下的bat输出不乱码
+   */
   def echo(String msg) {
     return _ant.echo(new String(msg.bytes, StandardCharsets.UTF_8))
   }

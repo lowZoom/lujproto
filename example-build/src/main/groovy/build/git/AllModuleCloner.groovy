@@ -15,8 +15,12 @@ class AllModuleCloner {
       }
     }
 
-    new GitCloneTo(projRoot)
+    new ModuleCloneTo(projRoot)
         .from('https://github.com/lowZoom/lujparent.git')
+        .from('https://github.com/lowZoom/lujava.git')
+        .from('https://github.com/lowZoom/lujdata.git')
+        .from('https://github.com/lowZoom/lujgenerate.git')
+        .from('https://github.com/lowZoom/lujtest.git')
   }
 
   private String _buildPath
