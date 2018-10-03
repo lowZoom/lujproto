@@ -6,7 +6,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.processing.Filer;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
@@ -14,7 +16,6 @@ import luj.generate.annotation.process.AnnoProc;
 import luj.generate.annotation.process.AnnoProc.Log;
 import luj.proto.anno.proc.proto.protobuf.ProtoFileGeneratorImpl.MessageField;
 import luj.proto.anno.proc.proto.protobuf.ProtoFileGeneratorImpl.ProtoWriter;
-import org.omg.CORBA.NO_IMPLEMENT;
 
 final class MessageImpl implements ProtoFileGeneratorImpl.ProtobufMessage {
 
@@ -46,7 +47,9 @@ final class MessageImpl implements ProtoFileGeneratorImpl.ProtobufMessage {
 
   @Override
   public List<MessageField> getFieldList() {
-    throw new NO_IMPLEMENT("getFieldList尚未实现");
+    return _elem.getEnclosedElements().stream()
+        .map(e -> new FieldImpl((ExecutableElement) e, new TypeMapImpl()))
+        .collect(Collectors.toList());
   }
 
   @Override
