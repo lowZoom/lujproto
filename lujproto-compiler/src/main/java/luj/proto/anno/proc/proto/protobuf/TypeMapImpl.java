@@ -3,9 +3,8 @@ package luj.proto.anno.proc.proto.protobuf;
 import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import luj.data.type.JStr;
-import luj.proto.anno.proc.proto.protobuf.FieldImpl.TypeMap;
 
-final class TypeMapImpl implements TypeMap {
+final class TypeMapImpl implements FieldImpl.TypeMap {
 
   @Override
   public String getProtoType(String javaType) {
