@@ -13,6 +13,7 @@
         <module name="luj.lujtest" />
         <module name="lujproto" />
         <module name="lujproto-compiler" />
+        <module name="lujproto-maven-plugin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,6 +25,7 @@
       <module name="luj.lujtest" target="1.8" />
       <module name="lujproto" target="1.8" />
       <module name="lujproto-compiler" target="1.8" />
+      <module name="lujproto-maven-plugin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

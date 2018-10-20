@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujtest.iml" filepath="$PROJECT_DIR$/.idea/luj.lujtest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujproto.iml" filepath="$PROJECT_DIR$/.idea/lujproto.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujproto-compiler.iml" filepath="$PROJECT_DIR$/.idea/lujproto-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lujproto-maven-plugin.iml" filepath="$PROJECT_DIR$/.idea/lujproto-maven-plugin.iml" />
     </modules>
   </component>
 </project>

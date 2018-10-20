@@ -8,6 +8,7 @@
     </list>
     <writeAnnotations>
       <writeAnnotation name="org.springframework.beans.factory.annotation.Autowired" />
+      <writeAnnotation name="org.apache.maven.plugins.annotations.Parameter" />
     </writeAnnotations>
   </component>
   <component name="MavenProjectsManager">
@@ -21,6 +22,7 @@
         <option value="$PROJECT_DIR$/../../lujava/lujava/pom.xml" />
         <option value="$PROJECT_DIR$/../../lujtest/lujtest/pom.xml" />
         <option value="$PROJECT_DIR$/../../lujgenerate/lujgenerate/pom.xml" />
+        <option value="$PROJECT_DIR$/../lujproto-maven-plugin/pom.xml" />
       </list>
     </option>
   </component>
