@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 final class Main {
 
   public static void main(String[] args) {
-
     try (AnnotationConfigApplicationContext appCtx =
         new AnnotationConfigApplicationContext(Main.class)) {
       new Main(appCtx).start();
