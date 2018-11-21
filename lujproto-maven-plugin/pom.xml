@@ -17,6 +17,27 @@
   <packaging>maven-plugin</packaging>
 
   <dependencies>
+    <dependency>
+      <groupId>luj.generate</groupId>
+      <artifactId>lujgenerate</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <!-- 版本太新会导致maven插件编译出错 -->
+      <!-- https://issues.apache.org/jira/browse/MPLUGIN-312 -->
+      <version>21.0</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
