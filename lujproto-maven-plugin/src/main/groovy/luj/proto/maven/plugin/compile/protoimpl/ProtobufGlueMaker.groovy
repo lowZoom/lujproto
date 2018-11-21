@@ -1,17 +1,21 @@
 package luj.proto.maven.plugin.compile.protoimpl
 
+import com.squareup.javapoet.TypeSpec
+
 interface ProtobufGlueMaker {
 
   enum Factory {
 
-    static ProtobufGlueMaker create() {
-      return new ProtobufGlueMakerImpl()
+    static ProtobufGlueMaker create(String protoPath) {
+      return new ProtobufGlueMakerImpl(protoPath)
     }
   }
 
   interface Result {
 
-    TypeSpe
+    TypeSpec getBuilderImpl()
+
+//    TypeSpec getBuilderImplFactory()
   }
 
   Result make()

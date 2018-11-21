@@ -22,6 +22,7 @@ class ProtoListImpl implements ProtoCompilerImpl.ProtoList {
 
     // 搜索protoc的路径，没有就下载
     Protoc protoc = envDir.findProtoc() ?: envDir.installProtoc('protoc-')
+    assert protoc != null
 
     // 生成java代码
     _protoList

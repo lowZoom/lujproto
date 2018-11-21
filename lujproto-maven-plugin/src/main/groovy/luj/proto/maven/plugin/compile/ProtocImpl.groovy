@@ -27,7 +27,7 @@ class ProtocImpl implements ProtoListImpl.Protoc {
       }
     }
 
-    return new ProtobufClassImpl()
+    return new ProtobufClassImpl(protoPath)
   }
 
   private final String _protocExe

@@ -1,32 +1,27 @@
 package luj.proto.maven.plugin.compile.protoimpl
 
+import com.google.common.io.Files
+import com.squareup.javapoet.TypeSpec
 import groovy.transform.PackageScope
 
 @PackageScope
 final class ProtobufGlueMakerImpl implements ProtobufGlueMaker {
 
-  ProtobufGlueMakerImpl(OutputPackage outputPackage) {
-    _outputPackage = outputPackage
+  ProtobufGlueMakerImpl(String protoPath) {
+    _protoPath = protoPath
   }
 
   @Override
-  void make() {
-    _outputPackage.generateBuilderImpl("生成 -> ${_outputPackage}BuilderImpl")
+  Result make() {
+    def builderImpl = TypeSpec.classBuilder("${getProtoName()}BuilderImpl")
+        .build()
+
+    return new ResultImpl(builderImpl)
   }
 
-  interface OutputPackage {
-
-    void generateBuilderImpl(String implName)
-  }
-
-  interface ProtoFile {
-
-//    void generateBuilderImpl()
-
-    String getProtoName()
+  private String getProtoName() {
+    return Files.getNameWithoutExtension(_protoPath)
   }
 
   private final String _protoPath
-
-  private final OutputPackage _outputPackage
 }

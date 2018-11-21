@@ -18,13 +18,13 @@ class ProtobufGlueMakerImplTest extends Specification {
     _protoPath = Paths.get('some', 'where', 'Protocal.proto')
 
     when:
-    generate()
+    def result = generate()
 
     then:
-
+    result.getBuilderImpl().name == 'ProtocalBuilderImpl'
   }
 
-  void generate() {
-    new ProtobufGlueMakerImpl().make()
+  ProtobufGlueMaker.Result generate() {
+    return new ProtobufGlueMakerImpl(_protoPath.toString()).make()
   }
 }
