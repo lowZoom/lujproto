@@ -9,5 +9,5 @@ public abstract class ProtoMetaHolder<T> {
   }
 
   @Autowired
-  ProtoConstructor<T> _protoConstructor;
+  private ProtoConstructor<T> _protoConstructor;
 }

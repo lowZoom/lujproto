@@ -9,10 +9,10 @@ import java.nio.file.Paths
 
 @PackageScope
 @AutoCtor
-class EnvDirImpl implements ProtoListImpl.EnvDir {
+final class EnvDirImpl implements ProtoListImpl.EnvDir {
 
   @Override
-  ProtoListImpl.InstalledProtoc findProtoc() {
+  ProtoListImpl.Protoc findProtoc() {
     String exePath = listEnvDir()
         .findAll { it.directory }
         .findAll { it.name.startsWith("protoc-$_version-") }
@@ -30,7 +30,7 @@ class EnvDirImpl implements ProtoListImpl.EnvDir {
   }
 
   @Override
-  ProtoListImpl.InstalledProtoc installProtoc(String tempDir) {
+  ProtoListImpl.Protoc installProtoc(String tempDir) {
 
     //TODO: 判断是否已经安装好protoc
 
@@ -45,12 +45,12 @@ class EnvDirImpl implements ProtoListImpl.EnvDir {
     return new File(_envPath).listFiles() ?: []
   }
 
-  private InstalledProtocImpl createProtoc(String exePath) {
+  private ProtocImpl createProtoc(String exePath) {
     ProjectImpl project = _outputRoot.project
     String protoRoot = project.protoRoot
 
     String outputPath = _outputRoot.outputPath
-    return new InstalledProtocImpl(exePath, protoRoot, outputPath)
+    return new ProtocImpl(exePath, protoRoot, outputPath)
   }
 
   private String _envPath

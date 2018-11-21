@@ -6,33 +6,6 @@ import java.util.List;
 
 final class ProtoFileGeneratorImpl implements ProtoFileGenerator {
 
-  public interface ProtobufMessage {
-
-    String getSyntax();
-
-    String getPackage();
-
-    String getMessageName();
-
-    List<MessageField> getFieldList();
-
-    ProtoWriter openWriter() throws IOException;
-  }
-
-  interface MessageField {
-
-    String getType();
-
-    String getName();
-  }
-
-  interface ProtoWriter extends Closeable {
-
-    void line(String format, Object... args) throws IOException;
-
-    void line() throws IOException;
-  }
-
   ProtoFileGeneratorImpl(ProtobufMessage protoType) {
     _protoType = protoType;
   }
@@ -63,6 +36,33 @@ final class ProtoFileGeneratorImpl implements ProtoFileGenerator {
     }
 
     writer.line("}");
+  }
+
+  interface ProtobufMessage {
+
+    String getSyntax();
+
+    String getPackage();
+
+    String getMessageName();
+
+    List<MessageField> getFieldList();
+
+    ProtoWriter openWriter() throws IOException;
+  }
+
+  interface MessageField {
+
+    String getType();
+
+    String getName();
+  }
+
+  interface ProtoWriter extends Closeable {
+
+    void line(String format, Object... args) throws IOException;
+
+    void line() throws IOException;
   }
 
   private final ProtobufMessage _protoType;

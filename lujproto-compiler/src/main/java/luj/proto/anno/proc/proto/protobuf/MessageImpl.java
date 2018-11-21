@@ -13,15 +13,13 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import luj.generate.annotation.process.AnnoProc;
-import luj.generate.annotation.process.AnnoProc.Log;
-import luj.proto.anno.proc.proto.protobuf.ProtoFileGeneratorImpl.MessageField;
-import luj.proto.anno.proc.proto.protobuf.ProtoFileGeneratorImpl.ProtoWriter;
+import luj.generate.annotation.process.type.ProcType;
 
 final class MessageImpl implements ProtoFileGeneratorImpl.ProtobufMessage {
 
-  MessageImpl(String packageName, String messageName,
-      TypeElement elem, Filer filer, Log log) {
-    _packageName = packageName;
+  MessageImpl(ProcType.Package aPackage, String messageName,
+      TypeElement elem, Filer filer, AnnoProc.Log log) {
+    _package = aPackage;
     _messageName = messageName;
 
     _elem = elem;
@@ -37,7 +35,7 @@ final class MessageImpl implements ProtoFileGeneratorImpl.ProtobufMessage {
 
   @Override
   public String getPackage() {
-    return _packageName;
+    return _package.getName();
   }
 
   @Override
@@ -46,19 +44,19 @@ final class MessageImpl implements ProtoFileGeneratorImpl.ProtobufMessage {
   }
 
   @Override
-  public List<MessageField> getFieldList() {
+  public List<ProtoFileGeneratorImpl.MessageField> getFieldList() {
     return _elem.getEnclosedElements().stream()
         .map(e -> new FieldImpl((ExecutableElement) e, new TypeMapImpl()))
         .collect(Collectors.toList());
   }
 
   @Override
-  public ProtoWriter openWriter() throws IOException {
+  public ProtoFileGeneratorImpl.ProtoWriter openWriter() throws IOException {
     String fileName = _messageName + ".proto";
     _log.warn(fileName);
 
     FileObject fileObj = _filer.createResource(
-        StandardLocation.SOURCE_OUTPUT, _packageName, fileName, _elem);
+        StandardLocation.SOURCE_OUTPUT, getPackage(), fileName, _elem);
 
     return new WriterImpl(toWriter(fileObj.openOutputStream()));
   }
@@ -67,7 +65,7 @@ final class MessageImpl implements ProtoFileGeneratorImpl.ProtobufMessage {
     return new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
   }
 
-  private final String _packageName;
+  private final ProcType.Package _package;
   private final String _messageName;
 
   private final TypeElement _elem;

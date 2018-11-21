@@ -9,13 +9,13 @@ class ProtoCompilerImpl implements ProtoCompiler {
 
   @Override
   void compile() {
-    //TODO: 搜集所有的proto文件
+    // 搜集所有的proto文件
     ProtoList protoList = _projectRoot.findProto()
-    if (protoList.empty) {
+    if (protoList.isEmpty()) {
       return
     }
 
-    //TODO: 编译生成搜到的proto文件
+    // 编译生成搜到的proto文件
     protoList.compileTo('lujproto')
   }
 

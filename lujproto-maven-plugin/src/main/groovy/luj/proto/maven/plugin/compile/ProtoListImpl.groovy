@@ -16,23 +16,19 @@ class ProtoListImpl implements ProtoCompilerImpl.ProtoList {
   void compileTo(String outputDir) {
     OutputRoot outputRoot = _project.getOutputRoot(outputDir)
 
-    //TODO: 拿到protobuf的版本
+    // 拿到protobuf的版本
     String protobufVer = _project.protobufVersion
     EnvDir envDir = outputRoot.getEnvDir(protobufVer)
 
-    //TODO: 搜索protoc的路径，没有就下载
-    InstalledProtoc protoc = envDir.findProtoc() ?: envDir.installProtoc('protoc-')
+    // 搜索protoc的路径，没有就下载
+    Protoc protoc = envDir.findProtoc() ?: envDir.installProtoc('protoc-')
 
-    for (proto in _protoList) {
-      protoc.compile(proto)
-    }
+    // 生成java代码
+    _protoList
+        .collect { protoc.compile(it) }
+        .forEach { it.generateGlue() }
 
-//    String outPath = Paths.get(_generateRoot, outputDir)
-//    for (proto in _fileList) {
-//      proto.compileTo(outPath)
-//    }
-
-    //TODO: 把生成的文件加入编译路径
+    // 把生成的文件加入编译路径
     outputRoot.addToProjectCompile()
   }
 
@@ -52,14 +48,19 @@ class ProtoListImpl implements ProtoCompilerImpl.ProtoList {
 
   interface EnvDir {
 
-    InstalledProtoc findProtoc()
+    Protoc findProtoc()
 
-    InstalledProtoc installProtoc(String tempDir)
+    Protoc installProtoc(String tempDir)
   }
 
-  interface InstalledProtoc {
+  interface Protoc {
 
-    void compile(String protoPath)
+    ProtobufClass compile(String protoPath)
+  }
+
+  interface ProtobufClass {
+
+    void generateGlue()
   }
 
   private List<String> _protoList
