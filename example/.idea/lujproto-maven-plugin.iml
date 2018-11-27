@@ -11,17 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="luj.lujgenerate" />
-    <orderEntry type="module" module-name="luj.lujava" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.18.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.18.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.18.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.18.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.google.auto.service:auto-service:1.0-rc4" level="project" />
-    <orderEntry type="library" name="Maven: com.google.auto:auto-common:0.8" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup:javapoet:1.10.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:21.0" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.4.15" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.3.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-model:3.3.9" level="project" />
@@ -51,6 +40,20 @@
     <orderEntry type="library" name="Maven: aspectj:aspectjrt:1.5.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.9.13" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.javaparser:javaparser-core:3.6.27" level="project" />
+    <orderEntry type="module" module-name="lujproto" />
+    <orderEntry type="module" module-name="luj.lujdata" />
+    <orderEntry type="module" module-name="luj.lujava" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.18.RELEASE" level="project" />
+    <orderEntry type="module" module-name="luj.lujgenerate" />
+    <orderEntry type="library" name="Maven: com.google.auto.service:auto-service:1.0-rc4" level="project" />
+    <orderEntry type="library" name="Maven: com.google.auto:auto-common:0.8" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup:javapoet:1.10.0" level="project" />
     <orderEntry type="module" module-name="luj.lujtest" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: luj.groovy:lugroovy:0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
