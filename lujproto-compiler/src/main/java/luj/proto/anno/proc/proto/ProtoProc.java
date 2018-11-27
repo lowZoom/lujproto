@@ -19,6 +19,6 @@ public final class ProtoProc extends SingleAnnoProc {
   @Override
   public void processElement(Context ctx) throws IOException {
     ProtoFileGenerator generator = ProtoFileGenerator.Factory.create(ctx);
-    generator.generate();
+//    generator.generate();
   }
 }

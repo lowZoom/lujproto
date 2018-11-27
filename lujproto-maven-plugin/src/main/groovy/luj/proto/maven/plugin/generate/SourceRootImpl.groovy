@@ -1,0 +1,51 @@
+package luj.proto.maven.plugin.generate
+
+import com.github.javaparser.JavaParser
+import groovy.transform.PackageScope
+import luj.proto.anno.Proto
+import luj.proto.maven.plugin.generate.maven.MavenHelper
+
+import java.nio.file.Files
+import java.nio.file.Path
+import java.util.stream.Collectors
+
+@PackageScope
+class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
+
+  SourceRootImpl(MavenHelper maven) {
+    _maven = maven
+  }
+
+  @Override
+  List<ProtoAllGeneratorImpl.ProtoType> searchProto() {
+    return walkSourceRoot()
+        .collect { JavaParser.parse(it) }
+        .collect { it.types }
+        .findAll { it.size() == 1 }
+        .collect { it[0] }
+        .findAll { it.getAnnotationByClass(Proto).isPresent() }
+        .collect { new ProtoTypeImpl(it, _maven) }
+  }
+
+  @Override
+  void logEmpty() {
+    _maven.log.info('未找到任何协议声明。')
+  }
+
+  @Override
+  void prepareGenerate() {
+    _maven.addCompileSourceRoot(_maven.path.targetGeneratedsourcesLujproto)
+  }
+
+  private List<Path> walkSourceRoot() {
+    def stream = Files.walk(_maven.path.srcMainJava)
+    def result = stream
+        .filter { Files.isRegularFile(it) }
+        .collect(Collectors.toList())
+
+    stream.close()
+    return result
+  }
+
+  private final MavenHelper _maven
+}

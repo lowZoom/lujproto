@@ -1,6 +1,6 @@
 package luj.proto.maven.plugin;
 
-import luj.proto.maven.plugin.compile.ProtoCompiler;
+import luj.proto.maven.plugin.generate.ProtoAllGenerator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -18,7 +18,10 @@ final class ProtocMojo extends AbstractMojo {
 
   @Override
   public void execute() {
-    ProtoCompiler compiler = ProtoCompiler.Factory.create(project);
-    compiler.compile();
+//    ProtoCompiler compiler = ProtoCompiler.Factory.create(project);
+//    compiler.compile();
+
+    ProtoAllGenerator generator = ProtoAllGenerator.Factory.create(project, getLog());
+    generator.generate();
   }
 }
