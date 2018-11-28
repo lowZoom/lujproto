@@ -2,7 +2,7 @@ package luj.proto.maven.plugin.generate
 
 import com.github.javaparser.ast.body.TypeDeclaration
 import groovy.transform.PackageScope
-import luj.proto.maven.plugin.generate.dotproto.DotProtoFileGenerator
+import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
 import luj.proto.maven.plugin.generate.maven.MavenHelper
 
 @PackageScope
@@ -28,6 +28,8 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
   @Override
   void generateAll() {
     DotProtoFileGenerator.Factory.create(_declaration, _maven).generate()
+
+
   }
 
   private final TypeDeclaration _declaration

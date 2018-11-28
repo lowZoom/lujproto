@@ -1,4 +1,4 @@
-package luj.proto.maven.plugin.generate.dotproto
+package luj.proto.maven.plugin.generate.dotproto.generate
 
 import spock.lang.Specification
 

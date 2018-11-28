@@ -1,4 +1,4 @@
-package luj.proto.maven.plugin.generate.dotproto
+package luj.proto.maven.plugin.generate.dotproto.generate
 
 import com.github.javaparser.ast.body.TypeDeclaration
 import groovy.transform.PackageScope
