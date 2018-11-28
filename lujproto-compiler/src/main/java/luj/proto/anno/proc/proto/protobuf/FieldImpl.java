@@ -1,6 +1,7 @@
 package luj.proto.anno.proc.proto.protobuf;
 
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.TypeName;
 import javax.lang.model.element.ExecutableElement;
 
 final class FieldImpl implements ProtoFileGeneratorImpl.MessageField {
@@ -12,7 +13,7 @@ final class FieldImpl implements ProtoFileGeneratorImpl.MessageField {
 
   @Override
   public String getType() {
-    ClassName className = (ClassName) ClassName.get(_element.getReturnType());
+    ClassName className = (ClassName) TypeName.get(_element.getReturnType());
     return _typeMap.getProtoType(className.simpleName());
   }
 

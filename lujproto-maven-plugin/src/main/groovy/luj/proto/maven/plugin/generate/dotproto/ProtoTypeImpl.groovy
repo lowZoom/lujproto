@@ -16,6 +16,24 @@ class ProtoTypeImpl implements DotProtoFileGeneratorImpl.ProtoType {
   }
 
   @Override
+  String getPackage() {
+    return _declaration.findCompilationUnit()
+        .flatMap { it.packageDeclaration }
+        .map { it.nameAsString }
+        .orElse('')
+  }
+
+  @Override
+  String getTypeName() {
+    return _declaration.nameAsString
+  }
+
+  @Override
+  List<DotProtoFileGeneratorImpl.ProtoField> getFieldList() {
+    return _declaration.methods.collect { new ProtoFieldImpl(it, new TypeMapImpl()) }
+  }
+
+  @Override
   void writeProtoFile(String content) {
     makeProtoDir()
         .resolve("${_declaration.name}.proto")
@@ -23,18 +41,10 @@ class ProtoTypeImpl implements DotProtoFileGeneratorImpl.ProtoType {
   }
 
   private Path makeProtoDir() {
-    String packagePath = splitPackage().join(File.separator)
+    String packagePath = getPackage().split(/\./).join(File.separator)
     Path dirPath = _maven.path.targetGeneratedsourcesLujproto.resolve(packagePath)
     new AntBuilder().mkdir(dir: dirPath.toString())
     return dirPath
-  }
-
-  private List splitPackage() {
-    return _declaration.findCompilationUnit()
-        .flatMap { it.packageDeclaration }
-        .map { it.nameAsString }
-        .map { it.split(/\./) }
-        .orElseGet { [] }
   }
 
   private final TypeDeclaration _declaration
