@@ -6,7 +6,7 @@ import java.lang.annotation.Annotation;
 import javax.annotation.processing.Processor;
 import luj.generate.annotation.process.SingleAnnoProc;
 import luj.proto.anno.Proto;
-import luj.proto.anno.proc.proto.protobuf.ProtoFileGenerator;
+import luj.proto.anno.proc.proto.meta.ProtoMetaGenerator;
 
 @AutoService(Processor.class)
 public final class ProtoProc extends SingleAnnoProc {
@@ -18,7 +18,6 @@ public final class ProtoProc extends SingleAnnoProc {
 
   @Override
   public void processElement(Context ctx) throws IOException {
-    ProtoFileGenerator generator = ProtoFileGenerator.Factory.create(ctx);
-//    generator.generate();
+    ProtoMetaGenerator.Factory.create(ctx).generate();
   }
 }

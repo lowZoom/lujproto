@@ -5,6 +5,7 @@ import javax.lang.model.element.TypeElement;
 import luj.generate.annotation.process.SingleAnnoProc;
 import luj.generate.annotation.process.type.ProcType;
 
+@Deprecated
 public interface ProtoFileGenerator {
 
   interface Factory {
