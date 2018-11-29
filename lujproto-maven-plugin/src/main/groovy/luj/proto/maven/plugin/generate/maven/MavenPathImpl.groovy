@@ -23,5 +23,10 @@ class MavenPathImpl implements MavenPath {
     return Paths.get(_proj.build.directory, 'generated-sources', 'lujproto')
   }
 
+  @Override
+  Path getBuildEnv() {
+    return Paths.get(_proj.basedir.absolutePath, 'build', 'env')
+  }
+
   private final MavenProject _proj
 }

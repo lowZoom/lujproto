@@ -2,7 +2,6 @@ package luj.proto.maven.plugin.generate.dotproto.generate
 
 import com.github.javaparser.ast.body.TypeDeclaration
 import groovy.transform.PackageScope
-import luj.proto.maven.plugin.generate.maven.MavenHelper
 
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
@@ -10,17 +9,16 @@ import java.nio.file.Path
 @PackageScope
 class ProtoTypeImpl implements DotProtoFileGeneratorImpl.ProtoType {
 
-  ProtoTypeImpl(TypeDeclaration declaration, MavenHelper maven) {
+  ProtoTypeImpl(TypeDeclaration declaration, String aPackage, Path protoPath) {
     _declaration = declaration
-    _maven = maven
+
+    _package = aPackage
+    _protoPath = protoPath
   }
 
   @Override
   String getPackage() {
-    return _declaration.findCompilationUnit()
-        .flatMap { it.packageDeclaration }
-        .map { it.nameAsString }
-        .orElse('')
+    return _package
   }
 
   @Override
@@ -35,19 +33,12 @@ class ProtoTypeImpl implements DotProtoFileGeneratorImpl.ProtoType {
 
   @Override
   void writeProtoFile(String content) {
-    makeProtoDir()
-        .resolve("${_declaration.name}.proto")
-        .write(content, StandardCharsets.UTF_8.name())
-  }
-
-  private Path makeProtoDir() {
-    String packagePath = getPackage().split(/\./).join(File.separator)
-    Path dirPath = _maven.path.targetGeneratedsourcesLujproto.resolve(packagePath)
-    new AntBuilder().mkdir(dir: dirPath.toString())
-    return dirPath
+    new AntBuilder().mkdir(dir: _protoPath.parent.toString())
+    _protoPath.write(content, StandardCharsets.UTF_8.name())
   }
 
   private final TypeDeclaration _declaration
 
-  private final MavenHelper _maven
+  private final String _package
+  private final Path _protoPath
 }

@@ -1,5 +1,6 @@
 package luj.proto.maven.plugin.generate.maven
 
+import org.apache.maven.model.Dependency
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 
@@ -15,9 +16,11 @@ interface MavenHelper {
     }
   }
 
-  void addCompileSourceRoot(Path path)
-
   MavenPath getPath()
 
   Log getLog()
+
+  void addCompileSourceRoot(Path path)
+
+  List<Dependency> getDependencies()
 }

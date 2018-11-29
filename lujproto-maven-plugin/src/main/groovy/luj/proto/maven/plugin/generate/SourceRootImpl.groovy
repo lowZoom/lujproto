@@ -4,6 +4,7 @@ import com.github.javaparser.JavaParser
 import groovy.transform.PackageScope
 import luj.proto.anno.Proto
 import luj.proto.maven.plugin.generate.maven.MavenHelper
+import luj.proto.maven.plugin.generate.protoc.ProtocFindOrInstaller
 
 import java.nio.file.Files
 import java.nio.file.Path
@@ -33,8 +34,11 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
   }
 
   @Override
-  void prepareGenerate() {
+  void generateAll(List<ProtoAllGeneratorImpl.ProtoType> protoList) {
     _maven.addCompileSourceRoot(_maven.path.targetGeneratedsourcesLujproto)
+
+    Path protocPath = ProtocFindOrInstaller.Factory.create(_maven).findOrInstall()
+    protoList.each { it.generateAll(protocPath) }
   }
 
   private List<Path> walkSourceRoot() {

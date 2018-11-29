@@ -1,6 +1,7 @@
 package luj.proto.maven.plugin.generate.maven
 
 import groovy.transform.PackageScope
+import org.apache.maven.model.Dependency
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 
@@ -17,11 +18,6 @@ class MavenHelperImpl implements MavenHelper {
   }
 
   @Override
-  void addCompileSourceRoot(Path path) {
-    _project.addCompileSourceRoot(path.toString())
-  }
-
-  @Override
   MavenPath getPath() {
     return _path
   }
@@ -29,6 +25,16 @@ class MavenHelperImpl implements MavenHelper {
   @Override
   Log getLog() {
     return _log
+  }
+
+  @Override
+  void addCompileSourceRoot(Path path) {
+    _project.addCompileSourceRoot(path.toString())
+  }
+
+  @Override
+  List<Dependency> getDependencies() {
+    return _project.getDependencies()
   }
 
   private final MavenProject _project

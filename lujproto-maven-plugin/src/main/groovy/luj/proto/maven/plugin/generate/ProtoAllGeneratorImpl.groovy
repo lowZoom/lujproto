@@ -2,6 +2,8 @@ package luj.proto.maven.plugin.generate
 
 import groovy.transform.PackageScope
 
+import java.nio.file.Path
+
 @PackageScope
 class ProtoAllGeneratorImpl implements ProtoAllGenerator {
 
@@ -27,11 +29,8 @@ class ProtoAllGeneratorImpl implements ProtoAllGenerator {
       return
     }
 
-    // 部署好protoc
-    _sourceRoot.prepareGenerate()
-
     // 每个协议开始生成对应文件
-    protoList.each { it.generateAll() }
+    _sourceRoot.generateAll(protoList)
   }
 
   interface SourceRoot {
@@ -40,7 +39,7 @@ class ProtoAllGeneratorImpl implements ProtoAllGenerator {
 
     void logEmpty()
 
-    void prepareGenerate()
+    void generateAll(List<ProtoType> protoList)
   }
 
   interface ProtoType {
@@ -49,7 +48,7 @@ class ProtoAllGeneratorImpl implements ProtoAllGenerator {
 
     void logWrongType()
 
-    void generateAll()
+    void generateAll(Path protocPath)
   }
 
   private final SourceRoot _sourceRoot

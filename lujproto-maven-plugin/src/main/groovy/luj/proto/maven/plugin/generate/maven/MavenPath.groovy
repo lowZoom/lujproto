@@ -7,4 +7,6 @@ interface MavenPath {
   Path getSrcMainJava()
 
   Path getTargetGeneratedsourcesLujproto()
+
+  Path getBuildEnv()
 }
