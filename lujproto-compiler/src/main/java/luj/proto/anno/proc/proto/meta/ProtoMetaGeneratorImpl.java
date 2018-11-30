@@ -2,6 +2,8 @@ package luj.proto.anno.proc.proto.meta;
 
 import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
+import javax.lang.model.element.Modifier;
+import org.springframework.stereotype.Component;
 
 final class ProtoMetaGeneratorImpl implements ProtoMetaGenerator {
 
@@ -11,7 +13,9 @@ final class ProtoMetaGeneratorImpl implements ProtoMetaGenerator {
 
   @Override
   public void generate() throws IOException {
-    TypeSpec metaType = TypeSpec.classBuilder(getMetaName())
+    TypeSpec metaType = _protoType.classBuilder(getMetaName())
+        .addModifiers(Modifier.FINAL)
+        .addAnnotation(Component.class)
         .build();
 
     _protoType.saveInSamePackage(metaType);
@@ -24,6 +28,8 @@ final class ProtoMetaGeneratorImpl implements ProtoMetaGenerator {
   interface ProtoType {
 
     String getTypeName();
+
+    TypeSpec.Builder classBuilder(String name);
 
     void saveInSamePackage(TypeSpec typeSpec) throws IOException;
   }

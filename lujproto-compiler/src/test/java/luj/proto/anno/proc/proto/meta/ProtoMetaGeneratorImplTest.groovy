@@ -13,6 +13,7 @@ class ProtoMetaGeneratorImplTest extends Specification {
   void setup() {
     _protoType = Mock(ProtoMetaGeneratorImpl.ProtoType)
     _protoType.getTypeName() >> { _typeName }
+    _protoType.classBuilder(_) >> { TypeSpec.classBuilder(it[0]) }
   }
 
   def "Generate:"() {
