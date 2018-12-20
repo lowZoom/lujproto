@@ -27,9 +27,9 @@ final class ProtoMetaGeneratorImpl implements ProtoMetaGenerator {
 
   interface ProtoType {
 
-    String getTypeName();
-
     TypeSpec.Builder classBuilder(String name);
+
+    String getTypeName();
 
     void saveInSamePackage(TypeSpec typeSpec) throws IOException;
   }

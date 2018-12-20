@@ -5,6 +5,7 @@ import groovy.transform.PackageScope
 import luj.proto.maven.plugin.generate.dotproto.compile.ProtoFileCompiler
 import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
 import luj.proto.maven.plugin.generate.maven.MavenHelper
+import luj.proto.maven.plugin.generate.protoimpl.ProtoImplGenerator
 
 import java.nio.file.Path
 
@@ -34,8 +35,9 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
     Path dotProtoPath = getDotProtoPath(protoPackage)
 
     DotProtoFileGenerator.Factory.create(_declaration, protoPackage, dotProtoPath).generate()
-
     ProtoFileCompiler.Factory.create(dotProtoPath, protocPath, _maven).compile()
+
+    ProtoImplGenerator.Factory.create(dotProtoPath, _declaration, protoPackage).generate()
   }
 
   private Path getDotProtoPath(String protoPackage) {
