@@ -16,6 +16,10 @@
         </value>
       </option>
     </AndroidXmlCodeStyleSettings>
+    <GroovyCodeStyleSettings>
+      <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
+      <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
+    </GroovyCodeStyleSettings>
     <JSCodeStyleSettings>
       <option name="INDENT_CHAINED_CALLS" value="false" />
     </JSCodeStyleSettings>
