@@ -1,4 +1,4 @@
-package luj.proto.maven.plugin.generate.maven
+package luj.proto.maven.plugin.generate.util.maven
 
 import org.apache.maven.model.Dependency
 import org.apache.maven.plugin.logging.Log

@@ -3,8 +3,8 @@ package luj.proto.maven.plugin.generate
 import com.github.javaparser.JavaParser
 import groovy.transform.PackageScope
 import luj.proto.anno.Proto
-import luj.proto.maven.plugin.generate.maven.MavenHelper
 import luj.proto.maven.plugin.generate.protoc.ProtocFindOrInstaller
+import luj.proto.maven.plugin.generate.util.maven.MavenHelper
 
 import java.nio.file.Files
 import java.nio.file.Path

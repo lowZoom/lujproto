@@ -1,6 +1,6 @@
 package luj.proto.maven.plugin.generate.protoc
 
-import luj.proto.maven.plugin.generate.maven.MavenHelper
+import luj.proto.maven.plugin.generate.util.maven.MavenHelper
 
 import java.nio.file.Path
 

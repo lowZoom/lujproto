@@ -1,4 +1,4 @@
-package luj.proto.maven.plugin.generate.maven
+package luj.proto.maven.plugin.generate.util.maven
 
 import java.nio.file.Path
 

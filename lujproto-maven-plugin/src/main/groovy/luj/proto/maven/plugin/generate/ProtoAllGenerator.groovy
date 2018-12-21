@@ -1,6 +1,6 @@
 package luj.proto.maven.plugin.generate
 
-import luj.proto.maven.plugin.generate.maven.MavenHelper
+import luj.proto.maven.plugin.generate.util.maven.MavenHelper
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 
