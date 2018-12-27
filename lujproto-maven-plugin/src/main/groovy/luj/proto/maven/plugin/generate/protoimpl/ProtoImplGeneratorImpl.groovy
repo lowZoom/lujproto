@@ -18,21 +18,24 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
   }
 
   @Override
-  void generate() {
+  ImplementationType generate() {
 //    FieldSpec builderField = makeBuilderField()
     List<FieldSpec> fieldList = _protoType.getFieldList().collect { makeField(it) }
 
-    _classSaver.saveInProtoPackage(TypeSpec.classBuilder(_protoType.typeName + 'Impl')
+    TypeSpec implmentationType = TypeSpec.classBuilder(_protoType.typeName + 'Impl')
         .addModifiers(Modifier.FINAL)
         .addSuperinterface(getProtoInterface())
 //        .addField(builderField)
         .addFields(fieldList)
         .addMethods(fieldList.collect { makeFieldGetter(it) })
-        .build())
+        .build()
+
+    _classSaver.saveInProtoPackage(implmentationType)
+    return new ImplementationTypeImpl(_protoType.packageName, implmentationType.name)
   }
 
   private ClassName getProtoInterface() {
-    return ClassName.get(_protoType.getPackageName(), _protoType.getTypeName())
+    return ClassName.get(_protoType.packageName, _protoType.typeName)
   }
 
 //  private FieldSpec makeBuilderField() {

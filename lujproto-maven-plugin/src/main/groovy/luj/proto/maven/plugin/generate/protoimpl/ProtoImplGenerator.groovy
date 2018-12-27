@@ -14,5 +14,12 @@ interface ProtoImplGenerator {
     }
   }
 
-  void generate()
+  interface ImplementationType {
+
+    String getPackageName()
+
+    String getTypeName()
+  }
+
+  ImplementationType generate()
 }

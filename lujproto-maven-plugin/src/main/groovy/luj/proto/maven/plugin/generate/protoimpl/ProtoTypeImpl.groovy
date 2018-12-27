@@ -2,11 +2,10 @@ package luj.proto.maven.plugin.generate.protoimpl
 
 import com.github.javaparser.ast.body.TypeDeclaration
 import com.google.common.io.Files
-import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.TypeSpec
 import groovy.transform.PackageScope
+import luj.proto.maven.plugin.generate.util.java.JavaClassSaver
 
-import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 
 @PackageScope
@@ -37,12 +36,9 @@ class ProtoTypeImpl implements ProtoImplGeneratorImpl.ProtoType, ProtoImplGenera
 
   @Override
   void saveInProtoPackage(TypeSpec implType) {
-    Writer writer = _dotProtoPath.resolveSibling(implType.name + '.java').newWriter(UTF_8)
-    JavaFile.builder(_packageName, implType).build().writeTo(writer)
-    writer.close()
+    Path javaPath = _dotProtoPath.resolveSibling(implType.name + '.java')
+    JavaClassSaver.Factory.create(javaPath, _packageName, implType).save()
   }
-
-  private static final String UTF_8 = StandardCharsets.UTF_8.name()
 
   private final Path _dotProtoPath
 
