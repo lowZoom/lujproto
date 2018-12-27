@@ -2,10 +2,16 @@ package luj.proto.internal.session;
 
 import luj.data.type.JStr;
 import luj.proto.api.ProtoSession;
+import luj.proto.internal.data.ProtoTypeSetter;
 import luj.proto.internal.object.ProtoObjectCreator;
 import org.omg.CORBA.NO_IMPLEMENT;
 
 final class ProtoSessionImpl implements ProtoSession {
+
+  ProtoSessionImpl(ProtoObjectCreator protoObjectCreator, ProtoTypeSetter protoTypeSetter) {
+    _protoObjectCreator = protoObjectCreator;
+    _protoTypeSetter = protoTypeSetter;
+  }
 
   @Override
   public <T> T createProto(Class<T> protoType) {
@@ -14,7 +20,7 @@ final class ProtoSessionImpl implements ProtoSession {
 
   @Override
   public void set(JStr str, String value) {
-    throw new NO_IMPLEMENT("set尚未实现");
+    _protoTypeSetter.setStr(str, value);
   }
 
   @Override
@@ -27,9 +33,7 @@ final class ProtoSessionImpl implements ProtoSession {
     throw new NO_IMPLEMENT("decode尚未实现");
   }
 
-  ProtoSessionImpl(ProtoObjectCreator protoObjectCreator) {
-    _protoObjectCreator = protoObjectCreator;
-  }
-
   private final ProtoObjectCreator _protoObjectCreator;
+
+  private final ProtoTypeSetter _protoTypeSetter;
 }
