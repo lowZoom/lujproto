@@ -1,4 +1,4 @@
-package luj.proto.internal.data.type;
+package luj.proto.internal.data.type.str;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

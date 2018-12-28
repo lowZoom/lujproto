@@ -1,4 +1,4 @@
-package luj.proto.internal.data.type;
+package luj.proto.internal.data.type.str;
 
 import luj.ava.spring.Internal;
 import luj.data.type.JStr;

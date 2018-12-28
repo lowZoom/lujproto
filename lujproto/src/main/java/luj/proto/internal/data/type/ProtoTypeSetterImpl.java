@@ -1,8 +1,8 @@
-package luj.proto.internal.data;
+package luj.proto.internal.data.type;
 
 import luj.ava.spring.Internal;
 import luj.data.type.JStr;
-import luj.proto.internal.data.type.ProtoStrSetter;
+import luj.proto.internal.data.type.str.ProtoStrSetter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Internal

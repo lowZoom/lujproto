@@ -1,4 +1,4 @@
-package luj.proto.internal.data;
+package luj.proto.internal.data.type;
 
 import javax.xml.crypto.Data;
 

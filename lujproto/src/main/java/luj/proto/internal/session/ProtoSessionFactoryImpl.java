@@ -2,7 +2,7 @@ package luj.proto.internal.session;
 
 import luj.ava.spring.Internal;
 import luj.proto.api.ProtoSession;
-import luj.proto.internal.data.ProtoTypeSetter;
+import luj.proto.internal.data.type.ProtoTypeSetter;
 import luj.proto.internal.meta.ProtoMetaMap;
 import luj.proto.internal.meta.ProtoMetaMapFactory;
 import luj.proto.internal.object.ProtoObjectCreator;

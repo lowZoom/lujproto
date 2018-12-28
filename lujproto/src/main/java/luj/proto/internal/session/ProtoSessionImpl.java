@@ -2,7 +2,7 @@ package luj.proto.internal.session;
 
 import luj.data.type.JStr;
 import luj.proto.api.ProtoSession;
-import luj.proto.internal.data.ProtoTypeSetter;
+import luj.proto.internal.data.type.ProtoTypeSetter;
 import luj.proto.internal.object.ProtoObjectCreator;
 import org.omg.CORBA.NO_IMPLEMENT;
 
