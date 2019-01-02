@@ -31,6 +31,7 @@ class ProtoConstructGeneratorImpl implements ProtoConstructGenerator {
         .addAnnotation(Component)
         .addSuperinterface(getConstructorInterface(protoClass))
         .addMethod(makeConstruct(protoClass))
+        .addMethod(makeConstructState(protoClass))
         .build()
   }
 
@@ -39,12 +40,23 @@ class ProtoConstructGeneratorImpl implements ProtoConstructGenerator {
   }
 
   private MethodSpec makeConstruct(ClassName protoClass) {
-    return MethodSpec.methodBuilder('construct')
-        .addAnnotation(Override)
-        .addModifiers(Modifier.PUBLIC)
+    return overrideBuilder('construct')
         .returns(protoClass)
         .addStatement('return new $T()', _protoType.getImplementationType())
         .build()
+  }
+
+  private MethodSpec makeConstructState(ClassName protoClass) {
+    return overrideBuilder('constructState')
+      .returns(Object)
+      .addStatement('return $TOuterClass.$L.newBuilder()', protoClass, protoClass.simpleName())
+      .build()
+  }
+
+  private MethodSpec.Builder overrideBuilder(String name) {
+    return MethodSpec.methodBuilder(name)
+        .addAnnotation(Override)
+        .addModifiers(Modifier.PUBLIC)
   }
 
   interface ProtoType {
