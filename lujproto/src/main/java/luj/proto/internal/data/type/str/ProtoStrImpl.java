@@ -1,7 +1,7 @@
 package luj.proto.internal.data.type.str;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 import luj.data.type.JStr;
 import luj.data.type.impl.Impl;
 
@@ -11,20 +11,28 @@ final class ProtoStrImpl {
     return (ProtoStrImpl) Impl.getter().apply(str);
   }
 
-  ProtoStrImpl(Consumer<String> setter, Supplier<String> getter) {
+  ProtoStrImpl(Object protoState, BiConsumer<Object, String> setter,
+      Function<Object, String> getter) {
+    _protoState = protoState;
+
     _setter = setter;
     _getter = getter;
   }
 
-  public Consumer<String> getSetter() {
+  public Object getProtoState() {
+    return _protoState;
+  }
+
+  public BiConsumer<Object, String> getSetter() {
     return _setter;
   }
 
-  public Supplier<String> getGetter() {
+  public Function<Object, String> getGetter() {
     return _getter;
   }
 
-  private final Consumer<String> _setter;
+  private final Object _protoState;
 
-  private final Supplier<String> _getter;
+  private final BiConsumer<Object, String> _setter;
+  private final Function<Object, String> _getter;
 }

@@ -6,6 +6,7 @@ import luj.proto.maven.plugin.generate.dotproto.compile.ProtoFileCompiler
 import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
 import luj.proto.maven.plugin.generate.protoconstruct.ProtoConstructGenerator
 import luj.proto.maven.plugin.generate.protoimpl.ProtoImplGenerator
+import luj.proto.maven.plugin.generate.protoprop.ProtoPropGenerator
 import luj.proto.maven.plugin.generate.util.maven.MavenHelper
 
 import java.nio.file.Path
@@ -41,8 +42,10 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
     def implementationType = ProtoImplGenerator.Factory
         .create(dotProtoPath, _declaration, protoPackage).generate()
 
-    ProtoConstructGenerator.Factory
-        .create(dotProtoPath, _declaration, protoPackage, implementationType).generate()
+    ProtoConstructGenerator.Factory.create(
+        dotProtoPath, _declaration, protoPackage, implementationType).generate()
+
+    ProtoPropGenerator.Factory.create(dotProtoPath, _declaration, protoPackage).generate()
   }
 
   private Path getDotProtoPath(String protoPackage) {

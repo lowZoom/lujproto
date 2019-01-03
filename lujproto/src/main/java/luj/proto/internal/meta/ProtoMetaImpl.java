@@ -1,15 +1,18 @@
 package luj.proto.internal.meta;
 
 import java.util.List;
+import luj.proto.internal.meta.property.ProtoProperty;
 import luj.proto.internal.meta.spring.ProtoConstructor;
 import luj.proto.internal.meta.spring.ProtoMetaHolder;
-import org.omg.CORBA.NO_IMPLEMENT;
 
 final class ProtoMetaImpl implements ProtoMeta {
 
-  ProtoMetaImpl(Class<?> protoType, ProtoMetaHolder<?> metaHolder) {
+  ProtoMetaImpl(Class<?> protoType, ProtoMetaHolder<?> metaHolder,
+      List<ProtoProperty> propertyList) {
     _protoType = protoType;
+
     _metaHolder = metaHolder;
+    _propertyList = propertyList;
   }
 
   @Override
@@ -19,7 +22,7 @@ final class ProtoMetaImpl implements ProtoMeta {
 
   @Override
   public List<ProtoProperty> getPropertyList() {
-    throw new NO_IMPLEMENT("getPropertyList尚未实现");
+    return _propertyList;
   }
 
   Class<?> getProtoType() {
@@ -29,4 +32,5 @@ final class ProtoMetaImpl implements ProtoMeta {
   private final Class<?> _protoType;
 
   private final ProtoMetaHolder<?> _metaHolder;
+  private final List<ProtoProperty> _propertyList;
 }
