@@ -26,12 +26,12 @@ class ProtoConstructGeneratorImpl implements ProtoConstructGenerator {
 
   private TypeSpec makeConstructorType() {
     ClassName protoClass = ClassName.get(_protoType.packageName, _protoType.protoName)
-    return TypeSpec.classBuilder(_protoType.protoName + 'Construct')
+    return TypeSpec.classBuilder(protoClass.simpleName() + 'Construct')
         .addModifiers(Modifier.FINAL)
         .addAnnotation(Component)
         .addSuperinterface(getConstructorInterface(protoClass))
         .addMethod(makeConstruct(protoClass))
-        .addMethod(makeConstructState(protoClass))
+        .addMethod(makeConstructState())
         .build()
   }
 
@@ -46,17 +46,19 @@ class ProtoConstructGeneratorImpl implements ProtoConstructGenerator {
         .build()
   }
 
-  private MethodSpec makeConstructState(ClassName protoClass) {
+  private MethodSpec makeConstructState() {
     return overrideBuilder('constructState')
-      .returns(Object)
-      .addStatement('return $TOuterClass.$L.newBuilder()', protoClass, protoClass.simpleName())
-      .build()
+        .returns(Object)
+        .build()
   }
 
   private MethodSpec.Builder overrideBuilder(String name) {
-    return MethodSpec.methodBuilder(name)
+    def builder = MethodSpec.methodBuilder(name)
         .addAnnotation(Override)
         .addModifiers(Modifier.PUBLIC)
+
+    _protoType.makeStateConstructMethod(builder)
+    return builder
   }
 
   interface ProtoType {
@@ -66,6 +68,8 @@ class ProtoConstructGeneratorImpl implements ProtoConstructGenerator {
     String getProtoName()
 
     TypeName getImplementationType()
+
+    void makeStateConstructMethod(MethodSpec.Builder methodBuilder)
   }
 
   interface ClassSaver {

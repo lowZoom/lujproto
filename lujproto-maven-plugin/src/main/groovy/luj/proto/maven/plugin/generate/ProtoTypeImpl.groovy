@@ -1,6 +1,8 @@
 package luj.proto.maven.plugin.generate
 
 import com.github.javaparser.ast.body.TypeDeclaration
+import com.google.common.io.Files
+import com.squareup.javapoet.ClassName
 import groovy.transform.PackageScope
 import luj.proto.maven.plugin.generate.dotproto.compile.ProtoFileCompiler
 import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
@@ -42,10 +44,19 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
     def implementationType = ProtoImplGenerator.Factory
         .create(dotProtoPath, _declaration, protoPackage).generate()
 
-    ProtoConstructGenerator.Factory.create(
-        dotProtoPath, _declaration, protoPackage, implementationType).generate()
+    ClassName stateType = makeStateType(protoPackage, dotProtoPath)
 
-    ProtoPropGenerator.Factory.create(dotProtoPath, _declaration, protoPackage).generate()
+    ProtoConstructGenerator.Factory.create(
+        dotProtoPath, _declaration, protoPackage, implementationType, stateType).generate()
+
+    ProtoPropGenerator.Factory.create(dotProtoPath, _declaration, stateType).generate()
+  }
+
+  private String getProtoPackage() {
+    return _declaration.findCompilationUnit()
+        .flatMap { it.packageDeclaration }
+        .map { it.nameAsString }
+        .orElse('')
   }
 
   private Path getDotProtoPath(String protoPackage) {
@@ -54,11 +65,9 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
     return dirPath.resolve("${_declaration.name}.proto")
   }
 
-  private String getProtoPackage() {
-    return _declaration.findCompilationUnit()
-        .flatMap { it.packageDeclaration }
-        .map { it.nameAsString }
-        .orElse('')
+  private ClassName makeStateType(String packageName, Path dotProtoPath) {
+    String protoName = Files.getNameWithoutExtension(dotProtoPath.toString())
+    return ClassName.get(packageName, "${protoName}OuterClass", protoName, 'Builder')
   }
 
   private final TypeDeclaration _declaration

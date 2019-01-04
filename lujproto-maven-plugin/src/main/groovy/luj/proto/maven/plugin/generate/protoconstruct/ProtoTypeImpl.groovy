@@ -2,6 +2,7 @@ package luj.proto.maven.plugin.generate.protoconstruct
 
 import com.github.javaparser.ast.body.TypeDeclaration
 import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import groovy.transform.PackageScope
@@ -14,13 +15,14 @@ import java.nio.file.Path
 class ProtoTypeImpl implements ProtoConstructGeneratorImpl.ProtoType, ProtoConstructGeneratorImpl.ClassSaver {
 
   ProtoTypeImpl(Path dotProtoPath, TypeDeclaration declaration, String packageName,
-                ProtoImplGenerator.ImplementationType implementationType) {
+                ProtoImplGenerator.ImplementationType implementationType, ClassName stateType) {
     _dotProtoPath = dotProtoPath
 
     _declaration = declaration
     _packageName = packageName
 
     _implementationType = implementationType
+    _stateType = stateType
   }
 
   @Override
@@ -39,6 +41,11 @@ class ProtoTypeImpl implements ProtoConstructGeneratorImpl.ProtoType, ProtoConst
   }
 
   @Override
+  void makeStateConstructMethod(MethodSpec.Builder methodBuilder) {
+    methodBuilder.addStatement('return $T().newBuilder', _stateType.enclosingClassName())
+  }
+
+  @Override
   void saveInProtoPackage(TypeSpec constructType) {
     Path javaPath = _dotProtoPath.resolveSibling(constructType.name + '.java')
     JavaClassSaver.Factory.create(javaPath, _packageName, constructType).save()
@@ -50,4 +57,5 @@ class ProtoTypeImpl implements ProtoConstructGeneratorImpl.ProtoType, ProtoConst
   private final String _packageName
 
   private final ProtoImplGenerator.ImplementationType _implementationType
+  private final ClassName _stateType
 }

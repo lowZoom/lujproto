@@ -19,13 +19,11 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
 
   @Override
   ImplementationType generate() {
-//    FieldSpec builderField = makeBuilderField()
     List<FieldSpec> fieldList = _protoType.getFieldList().collect { makeField(it) }
 
     TypeSpec implmentationType = TypeSpec.classBuilder(_protoType.typeName + 'Impl')
         .addModifiers(Modifier.FINAL)
         .addSuperinterface(getProtoInterface())
-//        .addField(builderField)
         .addFields(fieldList)
         .addMethods(fieldList.collect { makeFieldGetter(it) })
         .build()
@@ -37,15 +35,6 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
   private ClassName getProtoInterface() {
     return ClassName.get(_protoType.packageName, _protoType.typeName)
   }
-
-//  private FieldSpec makeBuilderField() {
-//    String protoName = _protoType.getTypeName()
-//    String outClass = protoName + 'OuterClass'
-//    return ClassName.get(_protoType.getPackageName(), outClass, protoName, 'Builder')
-//
-//    return FieldSpec.builder(getBuilderClass(), '_builder',
-//        Modifier.PRIVATE, Modifier.FINAL).build()
-//  }
 
   private FieldSpec makeField(ProtoField field) {
     return FieldSpec.builder(field.type, '_' + field.name)
