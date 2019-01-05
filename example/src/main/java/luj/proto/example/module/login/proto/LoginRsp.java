@@ -4,8 +4,12 @@ import luj.data.type.JStr;
 import luj.proto.anno.Proto;
 
 @Proto
-public interface LoginReq {
+public interface LoginRsp {
 
-  //TODO: 支持换成String，因为请求是只读
   JStr account();
+
+  LoginChar curChar();
+
+//  @Type(LoginChar.class)
+//  JList characterList();
 }

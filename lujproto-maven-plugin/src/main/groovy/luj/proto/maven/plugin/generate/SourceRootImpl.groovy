@@ -38,6 +38,9 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
     _maven.addCompileSourceRoot(_maven.path.targetGeneratedsourcesLujproto)
 
     Path protocPath = ProtocFindOrInstaller.Factory.create(_maven).findOrInstall()
+
+    //TODO: 收集一波proto，才能在后面展开对象字段
+
     protoList.each { it.generateAll(protocPath) }
   }
 

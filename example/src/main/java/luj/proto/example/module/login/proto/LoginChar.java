@@ -4,8 +4,9 @@ import luj.data.type.JStr;
 import luj.proto.anno.Proto;
 
 @Proto
-public interface LoginReq {
+public interface LoginChar {
 
-  //TODO: 支持换成String，因为请求是只读
-  JStr account();
+  JStr id();
+
+  JStr name();
 }

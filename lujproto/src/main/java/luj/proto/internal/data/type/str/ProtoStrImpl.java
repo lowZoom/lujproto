@@ -2,14 +2,8 @@ package luj.proto.internal.data.type.str;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import luj.data.type.JStr;
-import luj.data.type.impl.Impl;
 
 final class ProtoStrImpl {
-
-  static ProtoStrImpl get(JStr str) {
-    return (ProtoStrImpl) Impl.getter().apply(str);
-  }
 
   ProtoStrImpl(Object protoState, BiConsumer<Object, String> setter,
       Function<Object, String> getter) {

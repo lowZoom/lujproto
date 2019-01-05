@@ -13,7 +13,10 @@ class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
 
   @Override
   String getType() {
-    return _typeMap.getProtoType(_fieldDeclaration.type.asClassOrInterfaceType().nameAsString)
+    String fieldType = _fieldDeclaration.type.asClassOrInterfaceType().nameAsString
+    String scalarType = _typeMap.getProtoType(fieldType)
+    assert scalarType
+    return scalarType
   }
 
   @Override

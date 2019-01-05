@@ -8,14 +8,14 @@ class TypeMapImpl implements ProtoFieldImpl.TypeMap {
 
   @Override
   String getProtoType(String javaType) {
-    return MAP[javaType]
+    return SCALAR_MAP[javaType]
   }
 
   private static String key(Class keyType) {
     return keyType.simpleName
   }
 
-  private static final Map MAP = [
+  private static final Map SCALAR_MAP = [
       (key(JStr)): 'string',
   ]
 }

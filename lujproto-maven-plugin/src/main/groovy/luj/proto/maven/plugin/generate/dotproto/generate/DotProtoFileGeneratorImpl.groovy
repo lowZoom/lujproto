@@ -13,7 +13,7 @@ class DotProtoFileGeneratorImpl implements DotProtoFileGenerator {
   void generate() {
     _protoType.writeProtoFile([
         'syntax="proto3";',
-        "package ${_protoType.package};",
+        "package ${_protoType.package};\n",
         "message ${_protoType.typeName} {",
         makeFields(),
         '}\n',
@@ -22,7 +22,7 @@ class DotProtoFileGeneratorImpl implements DotProtoFileGenerator {
 
   private String makeFields() {
     return _protoType.fieldList.withIndex()
-        .collect { ProtoField f, int i -> "${f.type} ${f.name} = ${i+1};" }
+        .collect { ProtoField f, int i -> " ${f.type} ${f.name} = ${i + 1};" }
         .join('\n')
   }
 

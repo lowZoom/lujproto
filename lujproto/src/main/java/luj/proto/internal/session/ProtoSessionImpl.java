@@ -1,5 +1,7 @@
 package luj.proto.internal.session;
 
+import java.util.List;
+import luj.data.type.JList;
 import luj.data.type.JStr;
 import luj.proto.api.ProtoSession;
 import luj.proto.internal.data.type.ProtoTypeSetter;
@@ -21,6 +23,11 @@ final class ProtoSessionImpl implements ProtoSession {
   @Override
   public void set(JStr str, String value) {
     _protoTypeSetter.setStr(str, value);
+  }
+
+  @Override
+  public void set(JList list, List<?> value) {
+    _protoTypeSetter.setList(list, value);
   }
 
   @Override

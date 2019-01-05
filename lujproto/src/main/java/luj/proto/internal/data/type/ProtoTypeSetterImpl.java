@@ -1,7 +1,10 @@
 package luj.proto.internal.data.type;
 
+import java.util.List;
 import luj.ava.spring.Internal;
+import luj.data.type.JList;
 import luj.data.type.JStr;
+import luj.proto.internal.data.type.list.ProtoListSetter;
 import luj.proto.internal.data.type.str.ProtoStrSetter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +16,14 @@ final class ProtoTypeSetterImpl implements ProtoTypeSetter {
     _strSetter.set(str, val);
   }
 
+  @Override
+  public void setList(JList list, List<?> val) {
+    _listSetter.set(list, val);
+  }
+
   @Autowired
   private ProtoStrSetter _strSetter;
+
+  @Autowired
+  private ProtoListSetter _listSetter;
 }

@@ -1,6 +1,7 @@
 package luj.proto.example.module.login.protoh;
 
 import luj.proto.api.ProtoSession;
+import luj.proto.example.module.login.proto.LoginRsp;
 
 public interface LoginReqHandler {
 
@@ -8,5 +9,5 @@ public interface LoginReqHandler {
     return new LoginReqHandlerImpl(protoSession);
   }
 
-  void handle(byte[] reqData);
+  LoginRsp handle(byte[] reqData);
 }
