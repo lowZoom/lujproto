@@ -10,8 +10,6 @@ import luj.proto.internal.meta.spring.ProtoPropertyList
 import org.springframework.stereotype.Component
 
 import javax.lang.model.element.Modifier
-import java.util.function.BiConsumer
-import java.util.function.Function
 
 @PackageScope
 class ProtoPropGeneratorImpl implements ProtoPropGenerator {
@@ -46,11 +44,8 @@ class ProtoPropGeneratorImpl implements ProtoPropGenerator {
     return MethodSpec.methodBuilder(field.name)
         .returns(Object[])
         .addCode('return new $T[]{\n', Object)
-        .addCode('($T<$T,?>)$T::$L,\n', Function, protoClass, protoClass, field.name)
-
-        .addCode('($T<$T,>)$T::set$L', BiConsumer, stateType, stateType, field.name.capitalize())
-//    (BiConsumer<LoginReqOuterClass.LoginReq.Builder, String>)LoginReqOuterClass.LoginReq.Builder::setAccount,
-
+        .addCode('$T.f($T::$L),\n', ProtoPropertyList, protoClass, field.name)
+        .addCode('$T.f($T::set$L),\n', ProtoPropertyList, stateType, field.name.capitalize())
         .addStatement('}')
         .build()
   }

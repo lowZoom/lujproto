@@ -42,7 +42,7 @@ class ProtoTypeImpl implements ProtoConstructGeneratorImpl.ProtoType, ProtoConst
 
   @Override
   void makeStateConstructMethod(MethodSpec.Builder methodBuilder) {
-    methodBuilder.addStatement('return $T().newBuilder', _stateType.enclosingClassName())
+    methodBuilder.addStatement('return $T.newBuilder()', _stateType.enclosingClassName())
   }
 
   @Override

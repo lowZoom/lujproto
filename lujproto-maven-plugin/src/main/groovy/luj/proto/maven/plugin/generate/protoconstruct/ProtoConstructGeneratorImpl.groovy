@@ -47,18 +47,15 @@ class ProtoConstructGeneratorImpl implements ProtoConstructGenerator {
   }
 
   private MethodSpec makeConstructState() {
-    return overrideBuilder('constructState')
-        .returns(Object)
-        .build()
+    def builder = overrideBuilder('constructState').returns(Object)
+    _protoType.makeStateConstructMethod(builder)
+    return builder.build()
   }
 
   private MethodSpec.Builder overrideBuilder(String name) {
-    def builder = MethodSpec.methodBuilder(name)
+    return MethodSpec.methodBuilder(name)
         .addAnnotation(Override)
         .addModifiers(Modifier.PUBLIC)
-
-    _protoType.makeStateConstructMethod(builder)
-    return builder
   }
 
   interface ProtoType {
