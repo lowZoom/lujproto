@@ -14,7 +14,7 @@ class DotProtoFileGeneratorImplTest extends Specification {
     _protoType.getFieldList() >> { _fieldList.collect { mockField(it) } }
   }
 
-  def "Generate"() {
+  def "Generate:"() {
     given:
     _protoType.getPackage() >> 'a.b.c'
     _protoType.getTypeName() >> 'TestProto'
@@ -22,6 +22,7 @@ class DotProtoFileGeneratorImplTest extends Specification {
     _fieldList = [
         ['string', 'a'],
         ['int', 'b'],
+        ['x.y.z', 'c', 'x/y/z.proto'],
     ]
 
     when:
@@ -29,9 +30,13 @@ class DotProtoFileGeneratorImplTest extends Specification {
 
     then:
     1 * _protoType.writeProtoFile { _output = it }
+
     _output.contains('package a.b.c;')
     _output.contains('message TestProto ')
     _output.contains('int b = 2;')
+
+    _output.contains('import "x/y/z.proto";')
+    _output.contains('x.y.z c = 3;')
   }
 
   void generate() {
@@ -39,9 +44,14 @@ class DotProtoFileGeneratorImplTest extends Specification {
   }
 
   def mockField(List value) {
-    def mock = Stub(DotProtoFileGeneratorImpl.ProtoField)
-    mock.getType() >> value[0]
-    mock.getName() >> value[1]
-    return mock
+    def type = Stub(DotProtoFileGeneratorImpl.FieldType)
+    type.getName() >> { value[0] }
+    type.getProtoPath() >> { value.size() >= 3 ? value[2] : null }
+
+    def field = Stub(DotProtoFileGeneratorImpl.ProtoField)
+    field.getType() >> { type }
+    field.getName() >> { value[1] }
+
+    return field
   }
 }

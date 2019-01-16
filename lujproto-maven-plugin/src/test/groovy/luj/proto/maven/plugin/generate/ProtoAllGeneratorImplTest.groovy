@@ -32,12 +32,12 @@ class ProtoAllGeneratorImplTest extends Specification {
     new ProtoAllGeneratorImpl(mockSourceRoot()).generate()
   }
 
-  ProtoAllGeneratorImpl.SourceRoot mockSourceRoot() {
+  def mockSourceRoot() {
     _sourceRoot.searchProto() >> _protoList.collect { mockProtoType(it) }
     return _sourceRoot
   }
 
-  ProtoAllGeneratorImpl.ProtoType mockProtoType(List value) {
+  def mockProtoType(List value) {
     def mock = Stub(ProtoAllGeneratorImpl.ProtoType)
     mock.isInterface() >> { value[1] == 'interface' }
     mock.logWrongType() >> { _output << "${value[0]}.logWrongType" }

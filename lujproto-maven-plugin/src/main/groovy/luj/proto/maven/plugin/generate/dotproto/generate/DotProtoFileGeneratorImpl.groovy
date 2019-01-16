@@ -11,18 +11,30 @@ class DotProtoFileGeneratorImpl implements DotProtoFileGenerator {
 
   @Override
   void generate() {
+    List<ProtoField> fieldList = _protoType.getFieldList()
+
     _protoType.writeProtoFile([
         'syntax="proto3";',
         "package ${_protoType.package};\n",
+        makeImports(fieldList),
         "message ${_protoType.typeName} {",
-        makeFields(),
+        makeFields(fieldList),
         '}\n',
     ].join('\n'))
   }
 
-  private String makeFields() {
-    return _protoType.fieldList.withIndex()
-        .collect { ProtoField f, int i -> " ${f.type} ${f.name} = ${i + 1};" }
+  private String makeImports(List<ProtoField> fieldList) {
+    return fieldList
+        .collect { it.type.protoPath }
+        .findAll()
+        .collect { /import "${it}";/ }
+        .unique()
+        .join('\n')
+  }
+
+  private String makeFields(List<ProtoField> fieldList) {
+    return fieldList.withIndex()
+        .collect { ProtoField f, int i -> " ${f.type.name} ${f.name} = ${i + 1};" }
         .join('\n')
   }
 
@@ -39,7 +51,14 @@ class DotProtoFileGeneratorImpl implements DotProtoFileGenerator {
 
   interface ProtoField {
 
-    String getType()
+    FieldType getType()
+
+    String getName()
+  }
+
+  interface FieldType {
+
+    String getProtoPath()
 
     String getName()
   }

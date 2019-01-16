@@ -38,6 +38,8 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
     String protoPackage = getProtoPackage()
     Path dotProtoPath = getDotProtoPath(protoPackage)
 
+    //TODO: 上面部分应该执行完，收集一波，才能有足够信息生成下面的部分
+
     DotProtoFileGenerator.Factory.create(_declaration, protoPackage, dotProtoPath).generate()
     ProtoFileCompiler.Factory.create(dotProtoPath, protocPath, _maven).compile()
 
@@ -46,8 +48,8 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
 
     ClassName stateType = makeStateType(protoPackage, dotProtoPath)
 
-    ProtoConstructGenerator.Factory.create(
-        dotProtoPath, _declaration, protoPackage, implementationType, stateType).generate()
+    ProtoConstructGenerator.Factory.create(dotProtoPath,
+        _declaration, protoPackage, implementationType, stateType).generate()
 
     ProtoPropGenerator.Factory.create(dotProtoPath, _declaration, stateType).generate()
   }

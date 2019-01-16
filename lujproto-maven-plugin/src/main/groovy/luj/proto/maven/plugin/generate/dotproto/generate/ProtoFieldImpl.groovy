@@ -6,17 +6,20 @@ import groovy.transform.PackageScope
 @PackageScope
 class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
 
-  ProtoFieldImpl(MethodDeclaration fieldDeclaration, TypeMap typeMap) {
+  ProtoFieldImpl(MethodDeclaration fieldDeclaration, TypeMap scalarTypeMap) {
     _fieldDeclaration = fieldDeclaration
-    _typeMap = typeMap
+    _scalarTypeMap = scalarTypeMap
   }
 
   @Override
-  String getType() {
+  DotProtoFileGeneratorImpl.FieldType getType() {
     String fieldType = _fieldDeclaration.type.asClassOrInterfaceType().nameAsString
-    String scalarType = _typeMap.getProtoType(fieldType)
-    assert scalarType
-    return scalarType
+    String scalarType = _scalarTypeMap.getProtoType(fieldType)
+
+    //TODO: 自定义类型要取出proto路径
+    assert scalarType: "${fieldType}"
+
+    return new FieldTypeImpl(null, scalarType)
   }
 
   @Override
@@ -31,5 +34,6 @@ class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
 
   private final MethodDeclaration _fieldDeclaration
 
-  private final TypeMap _typeMap
+  private final TypeMap _scalarTypeMap
+//  private final Map<String, DotProtoCollector.Proto> _linkTypeMap
 }
