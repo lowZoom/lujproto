@@ -16,7 +16,7 @@ class DotProtoFileGeneratorImpl implements DotProtoFileGenerator {
     _protoType.writeProtoFile([
         'syntax="proto3";',
         "package ${_protoType.package};\n",
-        makeImports(fieldList),
+        makeImports(fieldList) + '\n',
         "message ${_protoType.typeName} {",
         makeFields(fieldList),
         '}\n',
@@ -29,7 +29,7 @@ class DotProtoFileGeneratorImpl implements DotProtoFileGenerator {
         .findAll()
         .collect { /import "${it}";/ }
         .unique()
-        .join('\n')
+        .join('\n') ?: '//--{ZERO_IMPORT}--//'
   }
 
   private String makeFields(List<ProtoField> fieldList) {
