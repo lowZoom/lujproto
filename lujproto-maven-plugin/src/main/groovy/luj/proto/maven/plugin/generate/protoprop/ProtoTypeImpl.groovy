@@ -5,7 +5,7 @@ import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import groovy.transform.PackageScope
-import luj.proto.maven.plugin.generate.util.java.JavaClassSaver
+import luj.proto.maven.plugin.generate.util.java.io.JavaClassSaver
 
 import java.nio.file.Path
 

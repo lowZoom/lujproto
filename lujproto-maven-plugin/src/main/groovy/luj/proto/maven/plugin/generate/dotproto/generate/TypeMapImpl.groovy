@@ -12,7 +12,7 @@ class TypeMapImpl implements ProtoFieldImpl.TypeMap {
   }
 
   private static String key(Class keyType) {
-    return keyType.simpleName
+    return keyType.name
   }
 
   private static final Map SCALAR_MAP = [

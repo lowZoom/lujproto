@@ -1,4 +1,4 @@
-package luj.proto.maven.plugin.generate.util.java
+package luj.proto.maven.plugin.generate.util.java.io
 
 import com.squareup.javapoet.TypeSpec
 
