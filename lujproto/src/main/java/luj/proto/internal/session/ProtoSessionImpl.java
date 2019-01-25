@@ -3,15 +3,20 @@ package luj.proto.internal.session;
 import java.util.List;
 import luj.data.type.JList;
 import luj.data.type.JStr;
+import luj.data.type.impl.Data;
 import luj.proto.api.ProtoSession;
 import luj.proto.internal.data.type.ProtoTypeSetter;
 import luj.proto.internal.object.ProtoObjectCreator;
+import luj.proto.internal.object.encode.ProtoObjectEncoder;
 import org.omg.CORBA.NO_IMPLEMENT;
 
 final class ProtoSessionImpl implements ProtoSession {
 
-  ProtoSessionImpl(ProtoObjectCreator protoObjectCreator, ProtoTypeSetter protoTypeSetter) {
+  ProtoSessionImpl(ProtoObjectCreator protoObjectCreator,
+      ProtoObjectEncoder protoObjectEncoder, ProtoTypeSetter protoTypeSetter) {
     _protoObjectCreator = protoObjectCreator;
+
+    _protoObjectEncoder = protoObjectEncoder;
     _protoTypeSetter = protoTypeSetter;
   }
 
@@ -32,7 +37,7 @@ final class ProtoSessionImpl implements ProtoSession {
 
   @Override
   public byte[] encode(Object protoObj) {
-    throw new NO_IMPLEMENT("encode尚未实现");
+    return _protoObjectEncoder.encode((Data) protoObj);
   }
 
   @Override
@@ -42,5 +47,6 @@ final class ProtoSessionImpl implements ProtoSession {
 
   private final ProtoObjectCreator _protoObjectCreator;
 
+  private final ProtoObjectEncoder _protoObjectEncoder;
   private final ProtoTypeSetter _protoTypeSetter;
 }

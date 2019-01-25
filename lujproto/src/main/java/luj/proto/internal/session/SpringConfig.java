@@ -9,5 +9,5 @@ import org.springframework.context.annotation.ComponentScan;
     @ComponentScan.Filter(Internal.class),
 })
 final class SpringConfig {
-
+  // NOOP
 }

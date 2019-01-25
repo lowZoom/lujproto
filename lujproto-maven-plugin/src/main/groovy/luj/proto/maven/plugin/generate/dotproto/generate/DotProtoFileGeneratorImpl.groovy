@@ -29,7 +29,7 @@ class DotProtoFileGeneratorImpl implements DotProtoFileGenerator {
         .findAll()
         .collect { /import "${it}";/ }
         .unique()
-        .join('\n') ?: '//--{ZERO_IMPORT}--//'
+        .join('\n') ?: '//--{NOTHING_TO_IMPORT}--//'
   }
 
   private String makeFields(List<ProtoField> fieldList) {
