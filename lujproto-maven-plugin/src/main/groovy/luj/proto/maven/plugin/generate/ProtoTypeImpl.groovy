@@ -30,15 +30,18 @@ class ProtoTypeImpl implements ProtoAllGeneratorImpl.ProtoType {
 
   @Override
   void logWrongType() {
+    //TODO: 等待实现
+  }
 
+  @Override
+  TypeDeclaration getDeclaration() {
+    return _declaration
   }
 
   @Override
   void generateAll(Path protocPath) {
     String protoPackage = getProtoPackage()
     Path dotProtoPath = getDotProtoPath(protoPackage)
-
-    //TODO: 上面部分应该执行完，收集一波，才能有足够信息生成下面的部分
 
     DotProtoFileGenerator.Factory.create(_declaration, protoPackage, dotProtoPath).generate()
     ProtoFileCompiler.Factory.create(dotProtoPath, protocPath, _maven).compile()

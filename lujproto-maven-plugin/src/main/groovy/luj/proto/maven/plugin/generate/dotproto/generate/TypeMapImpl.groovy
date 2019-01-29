@@ -4,7 +4,7 @@ import groovy.transform.PackageScope
 import luj.data.type.JStr
 
 @PackageScope
-class TypeMapImpl implements ProtoFieldImpl.TypeMap {
+class TypeMapImpl implements ProtoFieldImpl.TypeMap, ProtoFieldImpl2.TypeMap {
 
   @Override
   String getProtoType(String javaType) {

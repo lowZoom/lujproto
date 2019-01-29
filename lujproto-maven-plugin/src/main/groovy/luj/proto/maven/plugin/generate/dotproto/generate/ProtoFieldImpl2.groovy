@@ -1,21 +1,22 @@
 package luj.proto.maven.plugin.generate.dotproto.generate
 
-import com.github.javaparser.ast.body.MethodDeclaration
 import groovy.transform.PackageScope
 import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.util.java.parse.TypeFullNameResolver
 
 @PackageScope
-class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
+class ProtoFieldImpl2 implements DotProtoFileGeneratorImpl.ProtoField {
 
-  ProtoFieldImpl(MethodDeclaration fieldDeclaration, TypeMap scalarTypeMap) {
-    _fieldDeclaration = fieldDeclaration
+  ProtoFieldImpl2(DotProtoCollector.Field field, TypeMap scalarTypeMap, Map<String, DotProtoCollector.Proto> protoMap) {
+    _field = field
+
     _scalarTypeMap = scalarTypeMap
+    _protoMap = protoMap
   }
 
   @Override
   DotProtoFileGeneratorImpl.FieldType getType() {
-    String fieldType = TypeFullNameResolver.Factory.create(_fieldDeclaration.type).resolve()
+    String fieldType = TypeFullNameResolver.Factory.create(_field.type, _protoMap).resolve()
     String scalarType = _scalarTypeMap.getProtoType(fieldType)
 
     if (scalarType) {
@@ -26,7 +27,7 @@ class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
 
   @Override
   String getName() {
-    return _fieldDeclaration.nameAsString
+    return _field.getName()
   }
 
   private FieldTypeImpl toObjectType(String typeName) {
@@ -39,8 +40,8 @@ class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
     String getProtoType(String javaType)
   }
 
-  private final MethodDeclaration _fieldDeclaration
+  private final DotProtoCollector.Field _field
 
   private final TypeMap _scalarTypeMap
-//  private final Map<String, DotProtoCollector.Proto> _linkTypeMap
+  private final Map<String, DotProtoCollector.Proto> _protoMap
 }
