@@ -5,6 +5,7 @@ import groovy.transform.PackageScope
 import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.util.java.parse.TypeFullNameResolver
 
+@Deprecated
 @PackageScope
 class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
 
@@ -39,8 +40,9 @@ class ProtoFieldImpl implements DotProtoFileGeneratorImpl.ProtoField {
     String getProtoType(String javaType)
   }
 
+  //TODO: 替换成 类型已经解析成全名 的结果
   private final MethodDeclaration _fieldDeclaration
 
   private final TypeMap _scalarTypeMap
-//  private final Map<String, DotProtoCollector.Proto> _linkTypeMap
+  private final Map<String, DotProtoCollector.Proto> _linkTypeMap
 }

@@ -1,14 +1,14 @@
 package luj.proto.maven.plugin.generate.dotproto.generate
 
 import groovy.transform.PackageScope
+import luj.data.type.JRef
 import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.util.java.parse.TypeFullNameResolver
 
-@Deprecated
 @PackageScope
-class ProtoFieldImpl2 implements DotProtoFileGeneratorImpl.ProtoField {
+class ProtoFieldImpl3 implements DotProtoFileGeneratorImpl.ProtoField {
 
-  ProtoFieldImpl2(DotProtoCollector.Field field, TypeMap scalarTypeMap, Map<String, DotProtoCollector.Proto> protoMap) {
+  ProtoFieldImpl3(DotProtoCollector.Field field, TypeMap scalarTypeMap, Map<String, DotProtoCollector.Proto> protoMap) {
     _field = field
 
     _scalarTypeMap = scalarTypeMap
@@ -18,12 +18,18 @@ class ProtoFieldImpl2 implements DotProtoFileGeneratorImpl.ProtoField {
   @Override
   DotProtoFileGeneratorImpl.FieldType getType() {
     String fieldType = TypeFullNameResolver.Factory.create(_field.type, _protoMap).resolve()
-    String scalarType = _scalarTypeMap.getProtoType(fieldType)
 
+    String scalarType = _scalarTypeMap.getProtoType(fieldType)
     if (scalarType) {
       return new FieldTypeImpl(null, scalarType)
     }
-    return toObjectType(fieldType)
+
+    if (fieldType == JRef.name) {
+      DotProtoCollector.FieldType paramType = _field.type.getTypeParam(0)
+      return toObjectType(TypeFullNameResolver.Factory.create(paramType, _protoMap).resolve())
+    }
+
+    assert false: '不支持的字段类型：' + fieldType
   }
 
   @Override

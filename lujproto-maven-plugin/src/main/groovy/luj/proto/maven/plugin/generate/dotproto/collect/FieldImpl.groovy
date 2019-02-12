@@ -1,7 +1,7 @@
 package luj.proto.maven.plugin.generate.dotproto.collect
 
 import com.github.javaparser.ast.body.MethodDeclaration
-import com.github.javaparser.ast.type.Type
+import com.github.javaparser.ast.type.ClassOrInterfaceType
 import groovy.transform.PackageScope
 
 @PackageScope
@@ -18,7 +18,7 @@ class FieldImpl implements DotProtoCollector.Field {
 
   @Override
   DotProtoCollector.FieldType getType() {
-    Type type = _fieldDeclaration.type
+    ClassOrInterfaceType type = _fieldDeclaration.type.asClassOrInterfaceType()
     return new FieldTypeImpl(type, type.asClassOrInterfaceType().nameAsString)
   }
 

@@ -2,6 +2,7 @@ package luj.proto.internal.session;
 
 import luj.ava.spring.Internal;
 import luj.proto.api.ProtoSession;
+import luj.proto.internal.data.type.ProtoTypeGetter;
 import luj.proto.internal.data.type.ProtoTypeSetter;
 import luj.proto.internal.meta.ProtoMetaMap;
 import luj.proto.internal.meta.ProtoMetaMapFactory;
@@ -19,7 +20,8 @@ final class ProtoSessionFactoryImpl implements ProtoSessionFactory {
     ProtoMetaMap metaMap = _mapFactory.create(beanMap);
 
     ProtoObjectCreator creator = _creatorFactory.create(metaMap);
-    return new ProtoSessionImpl(creator, _objectEncoder, _typeSetter);
+    ProtoTypeGetter typeGetter = _typeGetterFactory.create(metaMap);
+    return new ProtoSessionImpl(creator, _typeSetter, typeGetter, _objectEncoder);
   }
 
   @Autowired
@@ -29,8 +31,11 @@ final class ProtoSessionFactoryImpl implements ProtoSessionFactory {
   private ProtoObjectCreator.Factory _creatorFactory;
 
   @Autowired
-  private ProtoObjectEncoder _objectEncoder;
+  private ProtoTypeGetter.Factory _typeGetterFactory;
 
   @Autowired
   private ProtoTypeSetter _typeSetter;
+
+  @Autowired
+  private ProtoObjectEncoder _objectEncoder;
 }

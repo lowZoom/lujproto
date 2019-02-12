@@ -1,13 +1,13 @@
 package luj.proto.maven.plugin.generate.dotproto.collect
 
 import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.ast.type.Type
+import com.github.javaparser.ast.type.ClassOrInterfaceType
 import groovy.transform.PackageScope
 
 @PackageScope
 class FieldTypeImpl implements DotProtoCollector.FieldType {
 
-  FieldTypeImpl(Type type, String name) {
+  FieldTypeImpl(ClassOrInterfaceType type, String name) {
     _type = type
     _name = name
   }
@@ -22,7 +22,16 @@ class FieldTypeImpl implements DotProtoCollector.FieldType {
     return _name
   }
 
-  private final Type _type
+  @Override
+  DotProtoCollector.FieldType getTypeParam(int index) {
+    ClassOrInterfaceType param = _type.getTypeArguments()
+        .orElse([])[index]
+        .asClassOrInterfaceType()
+
+    return new FieldTypeImpl(param, param.nameAsString)
+  }
+
+  private final ClassOrInterfaceType _type
 
   private final String _name
 }

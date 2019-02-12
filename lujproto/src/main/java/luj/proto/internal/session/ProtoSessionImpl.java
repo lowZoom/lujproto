@@ -2,9 +2,11 @@ package luj.proto.internal.session;
 
 import java.util.List;
 import luj.data.type.JList;
+import luj.data.type.JRef;
 import luj.data.type.JStr;
 import luj.data.type.impl.Data;
 import luj.proto.api.ProtoSession;
+import luj.proto.internal.data.type.ProtoTypeGetter;
 import luj.proto.internal.data.type.ProtoTypeSetter;
 import luj.proto.internal.object.ProtoObjectCreator;
 import luj.proto.internal.object.encode.ProtoObjectEncoder;
@@ -12,12 +14,14 @@ import org.omg.CORBA.NO_IMPLEMENT;
 
 final class ProtoSessionImpl implements ProtoSession {
 
-  ProtoSessionImpl(ProtoObjectCreator protoObjectCreator,
-      ProtoObjectEncoder protoObjectEncoder, ProtoTypeSetter protoTypeSetter) {
+  ProtoSessionImpl(ProtoObjectCreator protoObjectCreator, ProtoTypeSetter protoTypeSetter,
+      ProtoTypeGetter protoTypeGetter, ProtoObjectEncoder protoObjectEncoder) {
     _protoObjectCreator = protoObjectCreator;
 
-    _protoObjectEncoder = protoObjectEncoder;
     _protoTypeSetter = protoTypeSetter;
+    _protoTypeGetter = protoTypeGetter;
+
+    _protoObjectEncoder = protoObjectEncoder;
   }
 
   @Override
@@ -36,6 +40,11 @@ final class ProtoSessionImpl implements ProtoSession {
   }
 
   @Override
+  public <T> T get(JRef<T> ref) {
+    return _protoTypeGetter.getRef(ref);
+  }
+
+  @Override
   public byte[] encode(Object protoObj) {
     return _protoObjectEncoder.encode((Data) protoObj);
   }
@@ -47,6 +56,8 @@ final class ProtoSessionImpl implements ProtoSession {
 
   private final ProtoObjectCreator _protoObjectCreator;
 
-  private final ProtoObjectEncoder _protoObjectEncoder;
   private final ProtoTypeSetter _protoTypeSetter;
+  private final ProtoTypeGetter _protoTypeGetter;
+
+  private final ProtoObjectEncoder _protoObjectEncoder;
 }

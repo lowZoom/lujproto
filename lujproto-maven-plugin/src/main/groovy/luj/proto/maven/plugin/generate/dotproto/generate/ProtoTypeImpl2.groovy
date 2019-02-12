@@ -26,7 +26,7 @@ class ProtoTypeImpl2 implements DotProtoFileGeneratorImpl.ProtoType {
 
   @Override
   List<DotProtoFileGeneratorImpl.ProtoField> getFieldList() {
-    return _proto.getFieldList().collect { new ProtoFieldImpl2(it, new TypeMapImpl(), _protoMap) }
+    return _proto.getFieldList().collect { new ProtoFieldImpl3(it, new TypeMapImpl(), _protoMap) }
   }
 
   @Override

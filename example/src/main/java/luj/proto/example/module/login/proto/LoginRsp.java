@@ -1,5 +1,6 @@
 package luj.proto.example.module.login.proto;
 
+import luj.data.type.JRef;
 import luj.data.type.JStr;
 import luj.proto.anno.Proto;
 
@@ -8,7 +9,7 @@ public interface LoginRsp {
 
   JStr account();
 
-  LoginChar curChar();
+  JRef<LoginChar> curChar();
 
 //  @Type(LoginChar.class)
 //  JList characterList();

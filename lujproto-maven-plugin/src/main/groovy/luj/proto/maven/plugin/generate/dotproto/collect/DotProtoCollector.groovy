@@ -45,6 +45,8 @@ interface DotProtoCollector {
     CompilationUnit getCompilationUnit()
 
     String getName()
+
+    FieldType getTypeParam(int index)
   }
 
   Map<String, Proto> collect()

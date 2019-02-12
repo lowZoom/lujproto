@@ -11,7 +11,7 @@ final class ProtoObjectCreatorFactoryImpl implements ProtoObjectCreator.Factory 
 
   @Override
   public ProtoObjectCreator create(ProtoMetaMap protoMetaMap) {
-    return new ProtoObjectCreatorImpl(protoMetaMap, _protoObjOp, _protoFieldOp);
+    return new ProtoObjectCreatorImpl2(protoMetaMap, _protoObjOp, _protoFieldOp);
   }
 
   @Autowired

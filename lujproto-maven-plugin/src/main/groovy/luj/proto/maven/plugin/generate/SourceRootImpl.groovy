@@ -50,7 +50,8 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
     //TODO: 上面部分应该执行完，收集一波，才能有足够信息生成下面的部分
 
     Map<String, DotProtoCollector.Proto> protoMap = DotProtoCollector.Factory
-        .create(protoList.collect { it.declaration }, protocPath, _maven).collect()
+        .create(protoList.collect { it.declaration }, protocPath, _maven)
+        .collect()
 
     protoMap.values().forEach {
       DotProtoFileGenerator.Factory.create(it, protoMap).generate()
