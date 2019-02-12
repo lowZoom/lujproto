@@ -9,8 +9,8 @@ final class ProtoStrSetterImpl implements ProtoStrSetter {
 
   @Override
   public void set(JStr str, String val) {
-    ProtoStrImpl strImpl = _strImplGetOrCreator.getOrCreate(str);
-    strImpl.getSetter().accept(strImpl.getProtoState(), val);
+    ProtoStrImpl impl = _strImplGetOrCreator.getOrCreate(str);
+    impl.getSetter().accept(impl.getProtoState(), val);
   }
 
   @Autowired

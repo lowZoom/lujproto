@@ -10,6 +10,7 @@ import luj.proto.internal.meta.property.ProtoProperty;
 import luj.proto.internal.meta.spring.ProtoConstructor;
 import luj.proto.internal.object.field.ProtoFieldOp;
 
+@Deprecated
 final class ProtoObjectCreatorImpl implements ProtoObjectCreator {
 
   ProtoObjectCreatorImpl(ProtoMetaMap protoMetaMap,
