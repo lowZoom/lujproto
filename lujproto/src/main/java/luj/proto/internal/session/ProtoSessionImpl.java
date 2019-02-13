@@ -9,19 +9,21 @@ import luj.proto.api.ProtoSession;
 import luj.proto.internal.data.type.ProtoTypeGetter;
 import luj.proto.internal.data.type.ProtoTypeSetter;
 import luj.proto.internal.object.ProtoObjectCreator;
+import luj.proto.internal.object.decode.ProtoObjectDecoder;
 import luj.proto.internal.object.encode.ProtoObjectEncoder;
-import org.omg.CORBA.NO_IMPLEMENT;
 
 final class ProtoSessionImpl implements ProtoSession {
 
   ProtoSessionImpl(ProtoObjectCreator protoObjectCreator, ProtoTypeSetter protoTypeSetter,
-      ProtoTypeGetter protoTypeGetter, ProtoObjectEncoder protoObjectEncoder) {
+      ProtoTypeGetter protoTypeGetter, ProtoObjectEncoder protoObjectEncoder,
+      ProtoObjectDecoder protoObjectDecoder) {
     _protoObjectCreator = protoObjectCreator;
 
     _protoTypeSetter = protoTypeSetter;
     _protoTypeGetter = protoTypeGetter;
 
     _protoObjectEncoder = protoObjectEncoder;
+    _protoObjectDecoder = protoObjectDecoder;
   }
 
   @Override
@@ -50,8 +52,8 @@ final class ProtoSessionImpl implements ProtoSession {
   }
 
   @Override
-  public void decode(Object protoObj, byte[] data) {
-    throw new NO_IMPLEMENT("decode尚未实现");
+  public <T> T decode(byte[] data, Class<T> protoType) {
+    return _protoObjectDecoder.decode(data, protoType);
   }
 
   private final ProtoObjectCreator _protoObjectCreator;
@@ -60,4 +62,5 @@ final class ProtoSessionImpl implements ProtoSession {
   private final ProtoTypeGetter _protoTypeGetter;
 
   private final ProtoObjectEncoder _protoObjectEncoder;
+  private final ProtoObjectDecoder _protoObjectDecoder;
 }

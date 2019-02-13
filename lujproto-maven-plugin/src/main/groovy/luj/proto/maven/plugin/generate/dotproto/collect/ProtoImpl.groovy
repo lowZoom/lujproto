@@ -6,9 +6,6 @@ import luj.proto.maven.plugin.generate.util.maven.MavenHelper
 
 import java.nio.file.Path
 
-/**
- * @see luj.proto.maven.plugin.generate.ProtoTypeImpl#generateAll
- */
 @PackageScope
 class ProtoImpl implements DotProtoCollector.Proto {
 

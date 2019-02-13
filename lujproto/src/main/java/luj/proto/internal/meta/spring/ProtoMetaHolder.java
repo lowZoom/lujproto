@@ -8,13 +8,20 @@ public abstract class ProtoMetaHolder<T> {
     return _protoConstructor;
   }
 
-  public ProtoPropertyList<T> getPropertyList() {
-    return _propertyList;
+  public ProtoPropertyList<T> getProtoPropertyList() {
+    return _protoPropertyList;
+  }
+
+  public ProtoStateCodec<T> getProtoStateCodec() {
+    return _protoStateCodec;
   }
 
   @Autowired
   private ProtoConstructor<T> _protoConstructor;
 
   @Autowired
-  private ProtoPropertyList<T> _propertyList;
+  private ProtoPropertyList<T> _protoPropertyList;
+
+  @Autowired
+  private ProtoStateCodec<T> _protoStateCodec;
 }

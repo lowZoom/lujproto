@@ -2,7 +2,7 @@ package luj.proto.internal.object;
 
 import luj.proto.internal.meta.ProtoMeta;
 import luj.proto.internal.meta.ProtoMetaMap;
-import org.omg.CORBA.NO_IMPLEMENT;
+import luj.proto.internal.meta.spring.ProtoConstructor;
 
 public interface ProtoObjectCreator {
 
@@ -13,7 +13,7 @@ public interface ProtoObjectCreator {
 
   <T> T create(Class<T> protoType);
 
-  default Object create(ProtoMeta protoMeta) {
-    throw new NO_IMPLEMENT("create尚未实现");
-  }
+  Object create(ProtoMeta protoMeta);
+
+  Object create(ProtoMeta protoMeta, ProtoConstructor<?> constructor, Object protoState);
 }

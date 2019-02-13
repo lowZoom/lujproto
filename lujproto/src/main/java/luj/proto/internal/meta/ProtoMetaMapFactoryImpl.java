@@ -8,7 +8,6 @@ import luj.ava.reflect.generic.GenericType;
 import luj.ava.spring.Internal;
 import luj.proto.internal.meta.property.PropertyListFactory;
 import luj.proto.internal.meta.property.ProtoProperty;
-import luj.proto.internal.meta.spring.ProtoCodec;
 import luj.proto.internal.meta.spring.ProtoMetaHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,7 +17,7 @@ final class ProtoMetaMapFactoryImpl implements ProtoMetaMapFactory {
   @Override
   public ProtoMetaMap create(BeanMap beanMap) {
     Map<Class<?>, ProtoMeta> metaMap = beanMap.getMetaBeans().stream()
-        .map(b -> new ProtoMetaImpl(getProtoType(b), b, getPropertyList(b), _codec))
+        .map(b -> new ProtoMetaImpl(getProtoType(b), b, getPropertyList(b)))
         .collect(Collectors.toMap(ProtoMetaImpl::getProtoType, Function.identity()));
 
     return new ProtoMetaMapImpl(metaMap);
@@ -29,12 +28,9 @@ final class ProtoMetaMapFactoryImpl implements ProtoMetaMapFactory {
   }
 
   private List<ProtoProperty> getPropertyList(ProtoMetaHolder<?> metaBean) {
-    return _propertyListFactory.create(metaBean.getPropertyList());
+    return _propertyListFactory.create(metaBean.getProtoPropertyList());
   }
 
   @Autowired
   private PropertyListFactory _propertyListFactory;
-
-  @Autowired
-  private ProtoCodec<Object> _codec;
 }

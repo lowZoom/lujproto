@@ -2,7 +2,7 @@ package luj.proto.internal.data.type.obj;
 
 import luj.data.type.impl.Data;
 import luj.proto.internal.meta.ProtoMeta;
-import luj.proto.internal.meta.spring.ProtoCodec;
+import luj.proto.internal.meta.spring.ProtoStateCodec;
 
 public interface ProtoObjOp {
 
@@ -10,5 +10,5 @@ public interface ProtoObjOp {
 
   Object getState(Data objData);
 
-  ProtoCodec<?> getCodec(Data objData);
+  ProtoStateCodec<?> getCodec(Data objData);
 }

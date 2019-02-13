@@ -2,20 +2,18 @@ package luj.proto.internal.meta;
 
 import java.util.List;
 import luj.proto.internal.meta.property.ProtoProperty;
-import luj.proto.internal.meta.spring.ProtoCodec;
 import luj.proto.internal.meta.spring.ProtoConstructor;
 import luj.proto.internal.meta.spring.ProtoMetaHolder;
+import luj.proto.internal.meta.spring.ProtoStateCodec;
 
 final class ProtoMetaImpl implements ProtoMeta {
 
   ProtoMetaImpl(Class<?> protoType, ProtoMetaHolder<?> metaHolder,
-      List<ProtoProperty> propertyList, ProtoCodec<?> codec) {
+      List<ProtoProperty> propertyList) {
     _protoType = protoType;
 
     _metaHolder = metaHolder;
     _propertyList = propertyList;
-
-    _codec = codec;
   }
 
   @Override
@@ -29,8 +27,8 @@ final class ProtoMetaImpl implements ProtoMeta {
   }
 
   @Override
-  public ProtoCodec<?> getProtoCodec() {
-    return _codec;
+  public ProtoStateCodec<?> getStateCodec() {
+    return _metaHolder.getProtoStateCodec();
   }
 
   Class<?> getProtoType() {
@@ -41,6 +39,4 @@ final class ProtoMetaImpl implements ProtoMeta {
 
   private final ProtoMetaHolder<?> _metaHolder;
   private final List<ProtoProperty> _propertyList;
-
-  private final ProtoCodec<?> _codec;
 }

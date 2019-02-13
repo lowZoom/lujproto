@@ -3,8 +3,6 @@ package luj.proto.maven.plugin.generate
 import com.github.javaparser.ast.body.TypeDeclaration
 import groovy.transform.PackageScope
 
-import java.nio.file.Path
-
 @PackageScope
 class ProtoAllGeneratorImpl implements ProtoAllGenerator {
 
@@ -50,9 +48,6 @@ class ProtoAllGeneratorImpl implements ProtoAllGenerator {
     void logWrongType()
 
     TypeDeclaration getDeclaration()
-
-    @Deprecated
-    void generateAll(Path protocPath)
   }
 
   private final SourceRoot _sourceRoot

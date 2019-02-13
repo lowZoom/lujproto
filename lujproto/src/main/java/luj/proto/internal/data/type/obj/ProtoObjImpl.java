@@ -1,10 +1,10 @@
 package luj.proto.internal.data.type.obj;
 
-import luj.proto.internal.meta.spring.ProtoCodec;
+import luj.proto.internal.meta.spring.ProtoStateCodec;
 
 final class ProtoObjImpl {
 
-  ProtoObjImpl(Object state, ProtoCodec<?> codec) {
+  ProtoObjImpl(Object state, ProtoStateCodec<?> codec) {
     _state = state;
     _codec = codec;
   }
@@ -13,11 +13,11 @@ final class ProtoObjImpl {
     return _state;
   }
 
-  public ProtoCodec<?> getCodec() {
+  public ProtoStateCodec<?> getCodec() {
     return _codec;
   }
 
   private final Object _state;
 
-  private final ProtoCodec<?> _codec;
+  private final ProtoStateCodec<?> _codec;
 }

@@ -31,9 +31,13 @@ final class ProtoObjectCreatorImpl2 implements ProtoObjectCreator {
   @Override
   public Object create(ProtoMeta protoMeta) {
     ProtoConstructor<?> constructor = protoMeta.getConstructor();
-    Data protoObj = (Data) constructor.construct();
-
     Object protoState = constructor.constructState();
+    return create(protoMeta, constructor, protoState);
+  }
+
+  @Override
+  public Object create(ProtoMeta protoMeta, ProtoConstructor<?> constructor, Object protoState) {
+    Data protoObj = (Data) constructor.construct();
     _protoObjOp.initObjImpl(protoObj, protoState, protoMeta);
 
     for (ProtoProperty property : protoMeta.getPropertyList()) {

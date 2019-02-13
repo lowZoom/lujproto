@@ -17,5 +17,5 @@ public interface ProtoSession {
 
   byte[] encode(Object protoObj);
 
-  void decode(Object protoObj, byte[] data);
+  <T> T decode(byte[] data, Class<T> protoType);
 }
