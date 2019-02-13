@@ -1,5 +1,6 @@
 package luj.proto.internal.object.decode;
 
+import java.io.IOException;
 import luj.proto.internal.meta.ProtoMeta;
 import luj.proto.internal.meta.ProtoMetaMap;
 import luj.proto.internal.meta.spring.ProtoConstructor;
@@ -15,7 +16,7 @@ final class ProtoObjectDecoderImpl implements ProtoObjectDecoder {
 
   @SuppressWarnings("unchecked")
   @Override
-  public <T> T decode(byte[] data, Class<T> protoType) {
+  public <T> T decode(byte[] data, Class<T> protoType) throws IOException {
     ProtoMeta protoMeta = _protoMetaMap.get(protoType);
     ProtoConstructor<?> constructor = protoMeta.getConstructor();
 

@@ -1,5 +1,6 @@
 package luj.proto.internal.session;
 
+import java.io.IOException;
 import java.util.List;
 import luj.data.type.JList;
 import luj.data.type.JRef;
@@ -52,7 +53,7 @@ final class ProtoSessionImpl implements ProtoSession {
   }
 
   @Override
-  public <T> T decode(byte[] data, Class<T> protoType) {
+  public <T> T decode(byte[] data, Class<T> protoType) throws IOException {
     return _protoObjectDecoder.decode(data, protoType);
   }
 

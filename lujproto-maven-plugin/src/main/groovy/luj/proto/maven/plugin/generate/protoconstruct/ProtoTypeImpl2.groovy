@@ -14,8 +14,7 @@ import java.nio.file.Path
 @PackageScope
 class ProtoTypeImpl2 implements ProtoConstructGeneratorImpl.ProtoType, ProtoConstructGeneratorImpl.ClassSaver {
 
-  ProtoTypeImpl2(DotProtoCollector.Proto proto,
-                 ProtoImplGenerator.ImplementationType implementationType, ClassName stateType) {
+  ProtoTypeImpl2(DotProtoCollector.Proto proto, ProtoImplGenerator.ImplementationType implementationType, ClassName stateType) {
     _proto = proto
 
     _implementationType = implementationType

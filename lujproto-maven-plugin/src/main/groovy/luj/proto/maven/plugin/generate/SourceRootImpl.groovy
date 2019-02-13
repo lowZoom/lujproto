@@ -8,6 +8,7 @@ import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.dotproto.compile.ProtoFileCompiler
 import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
 import luj.proto.maven.plugin.generate.protoc.ProtocFindOrInstaller
+import luj.proto.maven.plugin.generate.protocodec.ProtoCodecGenerator
 import luj.proto.maven.plugin.generate.protoconstruct.ProtoConstructGenerator
 import luj.proto.maven.plugin.generate.protoimpl.ProtoImplGenerator
 import luj.proto.maven.plugin.generate.protoprop.ProtoPropGenerator
@@ -42,9 +43,6 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
     _maven.log.info('未找到任何协议声明。')
   }
 
-  /**
-   * @see luj.proto.maven.plugin.generate.ProtoTypeImpl#generateAll
-   */
   @Override
   void generateAll(List<ProtoAllGeneratorImpl.ProtoType> protoList) {
     _maven.addCompileSourceRoot(_maven.path.targetGeneratedsourcesLujproto)
@@ -63,9 +61,9 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
 
       ProtoConstructGenerator.Factory.create(it, implType, stateType).generate()
       ProtoPropGenerator.Factory.create(it, stateType).generate()
-    }
 
-//    protoList.each { it.generateAll(protocPath) }
+      ProtoCodecGenerator.Factory.create(it, stateType).generate()
+    }
   }
 
   private List<Path> walkSourceRoot() {

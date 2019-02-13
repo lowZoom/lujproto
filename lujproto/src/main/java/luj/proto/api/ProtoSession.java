@@ -1,5 +1,6 @@
 package luj.proto.api;
 
+import java.io.IOException;
 import java.util.List;
 import luj.data.type.JList;
 import luj.data.type.JRef;
@@ -17,5 +18,5 @@ public interface ProtoSession {
 
   byte[] encode(Object protoObj);
 
-  <T> T decode(byte[] data, Class<T> protoType);
+  <T> T decode(byte[] data, Class<T> protoType) throws IOException;
 }

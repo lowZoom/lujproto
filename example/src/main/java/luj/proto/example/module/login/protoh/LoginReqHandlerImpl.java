@@ -1,5 +1,6 @@
 package luj.proto.example.module.login.protoh;
 
+import java.io.IOException;
 import luj.proto.api.ProtoSession;
 import luj.proto.example.module.login.proto.LoginChar;
 import luj.proto.example.module.login.proto.LoginReq;
@@ -13,7 +14,7 @@ final class LoginReqHandlerImpl implements LoginReqHandler {
 
   @Override
   public LoginRsp handle(byte[] reqData) {
-    LoginReq req = _protoSession.decode(reqData, LoginReq.class);
+    LoginReq req = decode(reqData);
     System.out.println("请求登陆：" + req.account());
 
     LoginRsp rsp = _protoSession.createProto(LoginRsp.class);
@@ -26,6 +27,15 @@ final class LoginReqHandlerImpl implements LoginReqHandler {
 //        .collect(Collectors.toList()));
 
     return rsp;
+  }
+
+  private LoginReq decode(byte[] reqData) {
+    try {
+      return _protoSession.decode(reqData, LoginReq.class);
+
+    } catch (IOException e) {
+      throw new UnsupportedOperationException(e);
+    }
   }
 
   private LoginChar loadChar(int id) {
