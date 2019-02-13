@@ -9,6 +9,6 @@ final class ExampleEncoder implements ProtoCodec<Object> {
 
   @Override
   public byte[] encode(Object protoState) {
-    return ((MessageLite) protoState).toByteArray();
+    return ((MessageLite.Builder) protoState).build().toByteArray();
   }
 }

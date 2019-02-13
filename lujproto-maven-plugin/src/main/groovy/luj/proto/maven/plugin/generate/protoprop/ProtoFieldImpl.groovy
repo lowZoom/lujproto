@@ -3,6 +3,7 @@ package luj.proto.maven.plugin.generate.protoprop
 import com.github.javaparser.ast.body.MethodDeclaration
 import groovy.transform.PackageScope
 
+@Deprecated
 @PackageScope
 class ProtoFieldImpl implements ProtoPropGeneratorImpl.ProtoField {
 

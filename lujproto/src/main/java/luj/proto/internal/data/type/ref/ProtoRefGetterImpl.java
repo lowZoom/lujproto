@@ -1,14 +1,17 @@
 package luj.proto.internal.data.type.ref;
 
-import luj.ava.spring.Internal;
 import luj.data.type.JRef;
 import luj.proto.internal.meta.ProtoMeta;
 import luj.proto.internal.meta.ProtoMetaMap;
 import luj.proto.internal.object.ProtoObjectCreator;
-import org.springframework.beans.factory.annotation.Autowired;
 
-@Internal
 final class ProtoRefGetterImpl implements ProtoRefGetter {
+
+  ProtoRefGetterImpl(ProtoObjectCreator protoObjectCreator,
+      ProtoRefImplGetOrCreator refImplGetOrCreator) {
+    _protoObjectCreator = protoObjectCreator;
+    _refImplGetOrCreator = refImplGetOrCreator;
+  }
 
   @SuppressWarnings("unchecked")
   @Override
@@ -26,9 +29,7 @@ final class ProtoRefGetterImpl implements ProtoRefGetter {
     return (T) newObj;
   }
 
-  @Autowired
-  private ProtoRefImplGetOrCreator _refImplGetOrCreator;
+  private final ProtoObjectCreator _protoObjectCreator;
 
-  @Autowired
-  private ProtoObjectCreator _protoObjectCreator;
+  private final ProtoRefImplGetOrCreator _refImplGetOrCreator;
 }

@@ -1,18 +1,23 @@
 package luj.proto.maven.plugin.generate
 
 import com.github.javaparser.JavaParser
+import com.squareup.javapoet.ClassName
 import groovy.transform.PackageScope
 import luj.proto.anno.Proto
 import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.dotproto.compile.ProtoFileCompiler
 import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
 import luj.proto.maven.plugin.generate.protoc.ProtocFindOrInstaller
+import luj.proto.maven.plugin.generate.protoconstruct.ProtoConstructGenerator
 import luj.proto.maven.plugin.generate.protoimpl.ProtoImplGenerator
+import luj.proto.maven.plugin.generate.protoprop.ProtoPropGenerator
 import luj.proto.maven.plugin.generate.util.maven.MavenHelper
 
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.stream.Collectors
+
+import static com.google.common.io.Files.getNameWithoutExtension
 
 @PackageScope
 class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
@@ -45,10 +50,6 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
     _maven.addCompileSourceRoot(_maven.path.targetGeneratedsourcesLujproto)
 
     Path protocPath = ProtocFindOrInstaller.Factory.create(_maven).findOrInstall()
-
-    //TODO: 收集一波proto，才能在后面展开对象字段
-    //TODO: 上面部分应该执行完，收集一波，才能有足够信息生成下面的部分
-
     Map<String, DotProtoCollector.Proto> protoMap = DotProtoCollector.Factory
         .create(protoList.collect { it.declaration }, protocPath, _maven)
         .collect()
@@ -57,7 +58,11 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
       DotProtoFileGenerator.Factory.create(it, protoMap).generate()
       ProtoFileCompiler.Factory.create(it).compile()
 
-      ProtoImplGenerator.Factory.create(it, protoMap).generate()
+      def implType = ProtoImplGenerator.Factory.create(it, protoMap).generate()
+      ClassName stateType = makeStateType(it)
+
+      ProtoConstructGenerator.Factory.create(it, implType, stateType).generate()
+      ProtoPropGenerator.Factory.create(it, stateType).generate()
     }
 
 //    protoList.each { it.generateAll(protocPath) }
@@ -71,6 +76,11 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
 
     stream.close()
     return result
+  }
+
+  private ClassName makeStateType(DotProtoCollector.Proto proto) {
+    String protoName = getNameWithoutExtension(proto.dotProtoPath.toString())
+    return ClassName.get(proto.packageName, "${protoName}OuterClass", protoName, 'Builder')
   }
 
   private final MavenHelper _maven

@@ -9,6 +9,7 @@ import luj.proto.maven.plugin.generate.util.java.io.JavaClassSaver
 
 import java.nio.file.Path
 
+@Deprecated
 @PackageScope
 class ProtoTypeImpl implements ProtoPropGeneratorImpl.ProtoType, ProtoPropGeneratorImpl.ClassSaver {
 

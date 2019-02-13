@@ -9,7 +9,7 @@ public interface ProtoPropertyList<PROTO> {
     return f;
   }
 
-  static <T, U> BiConsumer<T, U> setter(BiConsumer<T, U> f) {
+  static <T, U> BiConsumer<T, U> setter(BiConsumer<T, U> f, Function<T, U> g) {
     return f;
   }
 }

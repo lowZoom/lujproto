@@ -6,6 +6,7 @@ import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import groovy.transform.PackageScope
+import luj.data.type.impl.Data
 
 import javax.lang.model.element.Modifier
 
@@ -23,6 +24,7 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
 
     TypeSpec implmentationType = TypeSpec.classBuilder(_protoType.typeName + 'Impl')
         .addModifiers(Modifier.FINAL)
+        .superclass(Data)
         .addSuperinterface(getProtoInterface())
         .addFields(fieldList)
         .addMethods(fieldList.collect { makeFieldGetter(it) })

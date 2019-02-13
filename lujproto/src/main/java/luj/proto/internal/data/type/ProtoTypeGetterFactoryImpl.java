@@ -10,9 +10,10 @@ final class ProtoTypeGetterFactoryImpl implements ProtoTypeGetter.Factory {
 
   @Override
   public ProtoTypeGetter create(ProtoMetaMap protoMetaMap) {
-    return new ProtoTypeGetterImpl(protoMetaMap, _refGetter);
+    ProtoRefGetter refGetter = _refGetterFactory.create(protoMetaMap);
+    return new ProtoTypeGetterImpl(protoMetaMap, refGetter);
   }
 
   @Autowired
-  private ProtoRefGetter _refGetter;
+  private ProtoRefGetter.Factory _refGetterFactory;
 }

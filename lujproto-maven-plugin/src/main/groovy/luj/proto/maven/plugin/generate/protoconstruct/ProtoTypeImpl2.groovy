@@ -1,26 +1,22 @@
 package luj.proto.maven.plugin.generate.protoconstruct
 
-import com.github.javaparser.ast.body.TypeDeclaration
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import groovy.transform.PackageScope
+import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.protoimpl.ProtoImplGenerator
 import luj.proto.maven.plugin.generate.util.java.io.JavaClassSaver
 
 import java.nio.file.Path
 
-@Deprecated
 @PackageScope
-class ProtoTypeImpl implements ProtoConstructGeneratorImpl.ProtoType, ProtoConstructGeneratorImpl.ClassSaver {
+class ProtoTypeImpl2 implements ProtoConstructGeneratorImpl.ProtoType, ProtoConstructGeneratorImpl.ClassSaver {
 
-  ProtoTypeImpl(Path dotProtoPath, TypeDeclaration declaration, String packageName,
-                ProtoImplGenerator.ImplementationType implementationType, ClassName stateType) {
-    _dotProtoPath = dotProtoPath
-
-    _declaration = declaration
-    _packageName = packageName
+  ProtoTypeImpl2(DotProtoCollector.Proto proto,
+                 ProtoImplGenerator.ImplementationType implementationType, ClassName stateType) {
+    _proto = proto
 
     _implementationType = implementationType
     _stateType = stateType
@@ -28,12 +24,12 @@ class ProtoTypeImpl implements ProtoConstructGeneratorImpl.ProtoType, ProtoConst
 
   @Override
   String getPackageName() {
-    return _packageName
+    return _proto.packageName
   }
 
   @Override
   String getProtoName() {
-    return _declaration.nameAsString
+    return _proto.protoName
   }
 
   @Override
@@ -48,14 +44,11 @@ class ProtoTypeImpl implements ProtoConstructGeneratorImpl.ProtoType, ProtoConst
 
   @Override
   void saveInProtoPackage(TypeSpec constructType) {
-    Path javaPath = _dotProtoPath.resolveSibling(constructType.name + '.java')
-    JavaClassSaver.Factory.create(javaPath, _packageName, constructType).save()
+    Path javaPath = _proto.dotProtoPath.resolveSibling(constructType.name + '.java')
+    JavaClassSaver.Factory.create(javaPath, _proto.packageName, constructType).save()
   }
 
-  private final Path _dotProtoPath
-
-  private final TypeDeclaration _declaration
-  private final String _packageName
+  private final DotProtoCollector.Proto _proto
 
   private final ProtoImplGenerator.ImplementationType _implementationType
   private final ClassName _stateType

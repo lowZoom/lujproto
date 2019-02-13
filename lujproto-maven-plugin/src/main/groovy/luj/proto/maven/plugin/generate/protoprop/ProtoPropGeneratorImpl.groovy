@@ -44,8 +44,8 @@ class ProtoPropGeneratorImpl implements ProtoPropGenerator {
     return MethodSpec.methodBuilder(field.name)
         .returns(Object[])
         .addCode('return new $T[]{\n', Object)
-        .addCode('$T.f($T::$L),\n', ProtoPropertyList, protoClass, field.name)
-        .addCode('$T.f($T::set$L),\n', ProtoPropertyList, stateType, field.name.capitalize())
+        .addCode('$T.getter($T::$L),\n', ProtoPropertyList, protoClass, field.name)
+        .addCode('$T.setter($T::set$L, $T::get$L),\n', ProtoPropertyList, stateType, field.name.capitalize(), stateType, field.name.capitalize())
         .addStatement('}')
         .build()
   }
