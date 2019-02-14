@@ -43,6 +43,11 @@ final class ProtoSessionImpl implements ProtoSession {
   }
 
   @Override
+  public String get(JStr str) {
+    return _protoTypeGetter.getStr(str);
+  }
+
+  @Override
   public <T> T get(JRef<T> ref) {
     return _protoTypeGetter.getRef(ref);
   }

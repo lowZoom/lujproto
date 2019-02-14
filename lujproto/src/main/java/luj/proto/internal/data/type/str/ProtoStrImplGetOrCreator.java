@@ -1,6 +1,5 @@
 package luj.proto.internal.data.type.str;
 
-import java.util.function.Function;
 import luj.ava.spring.Internal;
 import luj.data.type.JStr;
 import luj.proto.internal.meta.property.ProtoProperty;
@@ -27,7 +26,7 @@ final class ProtoStrImplGetOrCreator {
 
     return new ProtoStrImpl(_fieldOp.getProtoState(str),
         property.getValueSetter(),
-        (Function<Object, String>) null);
+        property.getValueGetter());
   }
 
   @Autowired

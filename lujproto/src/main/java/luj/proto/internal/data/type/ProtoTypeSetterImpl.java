@@ -5,7 +5,7 @@ import luj.ava.spring.Internal;
 import luj.data.type.JList;
 import luj.data.type.JStr;
 import luj.proto.internal.data.type.list.ProtoListSetter;
-import luj.proto.internal.data.type.str.ProtoStrSetter;
+import luj.proto.internal.data.type.str.ProtoStrAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Internal
@@ -22,7 +22,7 @@ final class ProtoTypeSetterImpl implements ProtoTypeSetter {
   }
 
   @Autowired
-  private ProtoStrSetter _strSetter;
+  private ProtoStrAccessor _strSetter;
 
   @Autowired
   private ProtoListSetter _listSetter;

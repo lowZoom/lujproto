@@ -9,9 +9,7 @@ public interface ProtoProperty {
 
   <T> T getValueSetter();
 
-  List<Class<?>> getTypeArgs();
+  <T> T getValueGetter();
 
-//  TypeInitializer getInitializer();
-//
-//  void initField(Object protoObj);
+  List<Class<?>> getTypeArgs();
 }

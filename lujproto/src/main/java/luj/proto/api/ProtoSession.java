@@ -14,6 +14,8 @@ public interface ProtoSession {
 
   void set(JList list, List<?> value);
 
+  String get(JStr str);
+
   <T> T get(JRef<T> ref);
 
   byte[] encode(Object protoObj);

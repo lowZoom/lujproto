@@ -1,14 +1,8 @@
 package luj.proto.internal.object.field;
 
-import luj.data.type.impl.Data;
-import luj.data.type.impl.Impl;
 import luj.proto.internal.meta.property.ProtoProperty;
 
 final class ProtoFieldImpl {
-
-  static ProtoFieldImpl get(Data fieldData) {
-    return (ProtoFieldImpl) Impl.getter().apply(fieldData);
-  }
 
   ProtoFieldImpl(Object protoState, ProtoProperty property) {
     _protoState = protoState;

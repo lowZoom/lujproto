@@ -40,12 +40,14 @@ class ProtoPropGeneratorImpl implements ProtoPropGenerator {
 
   private MethodSpec makeProperty(ClassName protoClass, ProtoField field) {
     ClassName stateType = _protoType.getStateType()
+    String fieldNameCap = field.name.capitalize()
 
     return MethodSpec.methodBuilder(field.name)
         .returns(Object[])
         .addCode('return new $T[]{\n', Object)
         .addCode('$T.getter($T::$L),\n', ProtoPropertyList, protoClass, field.name)
-        .addCode('$T.setter($T::set$L, $T::get$L),\n', ProtoPropertyList, stateType, field.name.capitalize(), stateType, field.name.capitalize())
+        .addCode('$T.setter($T::set$L, $T::get$L),\n', ProtoPropertyList, stateType, fieldNameCap, stateType, fieldNameCap)
+        .addCode('$T.getter($T::get$L),\n', ProtoPropertyList, stateType.enclosingClassName(), fieldNameCap)
         .addStatement('}')
         .build()
   }

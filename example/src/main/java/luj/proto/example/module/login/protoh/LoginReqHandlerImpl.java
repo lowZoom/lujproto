@@ -15,7 +15,7 @@ final class LoginReqHandlerImpl implements LoginReqHandler {
   @Override
   public LoginRsp handle(byte[] reqData) {
     LoginReq req = decode(reqData);
-    System.out.println("请求登陆：" + req.account());
+    System.out.println("请求登陆：" + _protoSession.get(req.account()));
 
     LoginRsp rsp = _protoSession.createProto(LoginRsp.class);
     _protoSession.set(rsp.account(), req.account().toString());

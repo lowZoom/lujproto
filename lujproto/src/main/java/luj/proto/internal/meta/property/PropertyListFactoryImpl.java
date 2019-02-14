@@ -35,7 +35,7 @@ final class PropertyListFactoryImpl implements PropertyListFactory {
   private ProtoProperty createProperty(Object[] info) {
     return new ProtoPropertyImpl(
         (Function<Object, Data>) info[0],
-        info[1]
-    );
+        info[1],
+        info[2]);
   }
 }

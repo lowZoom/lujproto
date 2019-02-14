@@ -7,9 +7,11 @@ import org.omg.CORBA.NO_IMPLEMENT;
 
 final class ProtoPropertyImpl implements ProtoProperty {
 
-  ProtoPropertyImpl(Function<Object, Data> dataGetter, Object valueSetter) {
+  ProtoPropertyImpl(Function<Object, Data> dataGetter, Object valueSetter, Object valueGetter) {
     _dataGetter = dataGetter;
+
     _valueSetter = valueSetter;
+    _valueGetter = valueGetter;
   }
 
   @Override
@@ -23,6 +25,12 @@ final class ProtoPropertyImpl implements ProtoProperty {
     return (T) _valueSetter;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public <T> T getValueGetter() {
+    return (T) _valueGetter;
+  }
+
   public List<Class<?>> getTypeArgs() {
     throw new NO_IMPLEMENT("getTypeArgs尚未实现");
   }
@@ -30,4 +38,5 @@ final class ProtoPropertyImpl implements ProtoProperty {
   private final Function<Object, Data> _dataGetter;
 
   private final Object _valueSetter;
+  private final Object _valueGetter;
 }
