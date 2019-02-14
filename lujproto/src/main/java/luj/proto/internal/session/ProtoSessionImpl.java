@@ -53,11 +53,6 @@ final class ProtoSessionImpl implements ProtoSession {
   }
 
   @Override
-  public <T> T getOrNew(JRef<T> ref) {
-    return _protoTypeGetter.getOrNewRef(ref);
-  }
-
-  @Override
   public byte[] encode(Object protoObj) {
     return _protoObjectEncoder.encode((Data) protoObj);
   }

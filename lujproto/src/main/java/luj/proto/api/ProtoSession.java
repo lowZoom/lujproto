@@ -18,8 +18,6 @@ public interface ProtoSession {
 
   <T> T get(JRef<T> ref);
 
-  <T> T getOrNew(JRef<T> ref);
-
   byte[] encode(Object protoObj);
 
   <T> T decode(byte[] data, Class<T> protoType) throws IOException;

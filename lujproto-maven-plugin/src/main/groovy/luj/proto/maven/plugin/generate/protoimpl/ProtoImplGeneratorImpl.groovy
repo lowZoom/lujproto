@@ -8,6 +8,7 @@ import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import groovy.transform.PackageScope
 import luj.data.type.impl.Data
+import luj.data.type.impl.Impl
 
 import javax.lang.model.element.Modifier
 
@@ -25,25 +26,26 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
 
     TypeSpec implmentationType = TypeSpec.classBuilder(_protoType.typeName + 'Impl')
         .addModifiers(Modifier.FINAL)
-        .addAnnotation(suppressWarn('unchecked'))
         .superclass(Data)
         .addSuperinterface(getProtoInterface())
+        .addAnnotation(makeSuppressWarn('unchecked'))
         .addFields(fieldList)
         .addMethods(fieldList.collect { makeFieldGetter(it) })
+        .addMethod(makeToString())
         .build()
 
     _classSaver.saveInProtoPackage(implmentationType)
     return new ImplementationTypeImpl(_protoType.packageName, implmentationType.name)
   }
 
-  private AnnotationSpec suppressWarn(String warn) {
+  private ClassName getProtoInterface() {
+    return ClassName.get(_protoType.packageName, _protoType.typeName)
+  }
+
+  private AnnotationSpec makeSuppressWarn(String warn) {
     return AnnotationSpec.builder(SuppressWarnings)
         .addMember('value', /"$warn"/)
         .build()
-  }
-
-  private ClassName getProtoInterface() {
-    return ClassName.get(_protoType.packageName, _protoType.typeName)
   }
 
   private FieldSpec makeField(ProtoField field) {
@@ -54,12 +56,23 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
   }
 
   private MethodSpec makeFieldGetter(FieldSpec field) {
-    return MethodSpec.methodBuilder(field.name.substring(1))
-        .addAnnotation(Override)
-        .addModifiers(Modifier.PUBLIC)
+    return overrideBuilder(field.name.substring(1))
         .returns(field.type)
         .addStatement('return $L', field.name)
         .build()
+  }
+
+  private MethodSpec makeToString() {
+    return overrideBuilder('toString')
+        .returns(String)
+        .addStatement('return $T.get(this).toString()', Impl)
+        .build()
+  }
+
+  private MethodSpec.Builder overrideBuilder(String name) {
+    return MethodSpec.methodBuilder(name)
+        .addAnnotation(Override)
+        .addModifiers(Modifier.PUBLIC)
   }
 
   interface ProtoType {

@@ -54,7 +54,7 @@ class ProtoCodecGeneratorImpl implements ProtoCodecGenerator {
         .returns(Object)
         .addParameter(byte[], param)
         .addException(IOException)
-        .addStatement('return $T.parseFrom($L)', _stateType.enclosingClassName(), param)
+        .addStatement('return $T.parseFrom($L).toBuilder()', _stateType.enclosingClassName(), param)
         .build()
   }
 

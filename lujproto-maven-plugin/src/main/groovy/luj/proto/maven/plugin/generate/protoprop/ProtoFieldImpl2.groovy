@@ -20,14 +20,12 @@ class ProtoFieldImpl2 implements ProtoPropGeneratorImpl.ProtoField {
   }
 
   @Override
-  String getStateSetterLocator() {
-    String typeName = TypeFullNameResolver.Factory.create(_field.type, [:]).resolve()
-    if (typeName != JRef.name) {
-      return 'null'
-    }
-
+  String getStateGetter() {
     String stateTypeName = _stateType.simpleNames().join('.')
-    return "$stateTypeName::get${_field.name.capitalize()}Builder"
+    String typeName = TypeFullNameResolver.Factory.create(_field.type, [:]).resolve()
+
+    String postfix = (typeName != JRef.name) ? '' : 'Builder'
+    return "$stateTypeName::get${_field.name.capitalize()}$postfix"
   }
 
   private final DotProtoCollector.Field _field

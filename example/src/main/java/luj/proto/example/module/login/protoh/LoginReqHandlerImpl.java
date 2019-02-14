@@ -21,13 +21,13 @@ final class LoginReqHandlerImpl implements LoginReqHandler {
     LoginRsp rsp = _protoSession.createProto(LoginRsp.class);
     _protoSession.set(rsp.account(), account);
 
-    loadChar(_protoSession.getOrNew(rsp.curChar()), 1);
+    loadChar(_protoSession.get(rsp.curChar()), 1);
 
 //    _protoSession.set(rsp.characterList(), IntStream.range(1, 3)
 //        .mapToObj(this::loadChar)
 //        .collect(Collectors.toList()));
 
-    return decode(_protoSession.encode(rsp), LoginRsp.class);
+    return rsp;
   }
 
   private <T> T decode(byte[] reqData, Class<T> protoType) {

@@ -17,6 +17,11 @@ final class ProtoObjImpl {
     return _codec;
   }
 
+  @Override
+  public String toString() {
+    return _state.toString();
+  }
+
   private final Object _state;
 
   private final ProtoStateCodec<?> _codec;
