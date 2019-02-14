@@ -20,8 +20,8 @@ final class LoginUiImpl implements LoginUi {
     LoginRsp rsp = _loginReqHandler.handle(data);
 
     System.out.println("登录成功，角色信息");
-    System.out.println(rsp.account());
-    System.out.println(rsp.curChar());
+    System.out.println(_protoSession.get(rsp.account()));
+    System.out.println(_protoSession.get(rsp.curChar()));
 //    System.out.println(rsp.characterList());
   }
 

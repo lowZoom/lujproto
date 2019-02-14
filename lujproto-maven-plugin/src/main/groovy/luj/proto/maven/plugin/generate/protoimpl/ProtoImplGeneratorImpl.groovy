@@ -1,5 +1,6 @@
 package luj.proto.maven.plugin.generate.protoimpl
 
+import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.FieldSpec
 import com.squareup.javapoet.MethodSpec
@@ -24,6 +25,7 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
 
     TypeSpec implmentationType = TypeSpec.classBuilder(_protoType.typeName + 'Impl')
         .addModifiers(Modifier.FINAL)
+        .addAnnotation(suppressWarn('unchecked'))
         .superclass(Data)
         .addSuperinterface(getProtoInterface())
         .addFields(fieldList)
@@ -32,6 +34,12 @@ class ProtoImplGeneratorImpl implements ProtoImplGenerator {
 
     _classSaver.saveInProtoPackage(implmentationType)
     return new ImplementationTypeImpl(_protoType.packageName, implmentationType.name)
+  }
+
+  private AnnotationSpec suppressWarn(String warn) {
+    return AnnotationSpec.builder(SuppressWarnings)
+        .addMember('value', /"$warn"/)
+        .build()
   }
 
   private ClassName getProtoInterface() {

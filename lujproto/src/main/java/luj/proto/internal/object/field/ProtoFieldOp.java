@@ -7,7 +7,7 @@ public interface ProtoFieldOp {
 
   void initFieldImpl(Data fieldData, Object protoState, ProtoProperty property);
 
-  void setTypeImpl(Object typeImpl);
+  void setTypeImpl(Data fieldData, Object typeImpl);
 
   <T> T getTypeImpl(Data fieldData);
 

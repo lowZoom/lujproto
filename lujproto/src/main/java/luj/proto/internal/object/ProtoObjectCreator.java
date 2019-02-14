@@ -1,5 +1,6 @@
 package luj.proto.internal.object;
 
+import luj.data.type.impl.Data;
 import luj.proto.internal.meta.ProtoMeta;
 import luj.proto.internal.meta.ProtoMetaMap;
 import luj.proto.internal.meta.spring.ProtoConstructor;
@@ -13,7 +14,7 @@ public interface ProtoObjectCreator {
 
   <T> T create(Class<T> protoType);
 
-  Object create(ProtoMeta protoMeta);
+  Data create(ProtoMeta protoMeta);
 
-  Object create(ProtoMeta protoMeta, ProtoConstructor<?> constructor, Object protoState);
+  Data create(ProtoMeta protoMeta, ProtoConstructor<?> constructor, Object protoState);
 }

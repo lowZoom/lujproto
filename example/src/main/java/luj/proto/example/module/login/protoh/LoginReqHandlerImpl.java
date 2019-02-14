@@ -14,24 +14,25 @@ final class LoginReqHandlerImpl implements LoginReqHandler {
 
   @Override
   public LoginRsp handle(byte[] reqData) {
-    LoginReq req = decode(reqData);
-    System.out.println("请求登陆：" + _protoSession.get(req.account()));
+    LoginReq req = decode(reqData, LoginReq.class);
+    String account = _protoSession.get(req.account());
+    System.out.println("请求登陆：" + account);
 
     LoginRsp rsp = _protoSession.createProto(LoginRsp.class);
-    _protoSession.set(rsp.account(), req.account().toString());
+    _protoSession.set(rsp.account(), account);
 
-    loadChar(_protoSession.get(rsp.curChar()), 1);
+    loadChar(_protoSession.getOrNew(rsp.curChar()), 1);
 
 //    _protoSession.set(rsp.characterList(), IntStream.range(1, 3)
 //        .mapToObj(this::loadChar)
 //        .collect(Collectors.toList()));
 
-    return rsp;
+    return decode(_protoSession.encode(rsp), LoginRsp.class);
   }
 
-  private LoginReq decode(byte[] reqData) {
+  private <T> T decode(byte[] reqData, Class<T> protoType) {
     try {
-      return _protoSession.decode(reqData, LoginReq.class);
+      return _protoSession.decode(reqData, protoType);
 
     } catch (IOException e) {
       throw new UnsupportedOperationException(e);

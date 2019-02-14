@@ -16,7 +16,7 @@ final class ProtoStrImplGetOrCreator {
     }
 
     ProtoStrImpl newImpl = createStrImpl(str);
-    _fieldOp.setTypeImpl(newImpl);
+    _fieldOp.setTypeImpl(str, newImpl);
     return newImpl;
   }
 

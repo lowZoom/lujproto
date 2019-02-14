@@ -1,17 +1,20 @@
 package luj.proto.internal.meta.property;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.function.Function;
 import luj.data.type.impl.Data;
-import org.omg.CORBA.NO_IMPLEMENT;
 
 final class ProtoPropertyImpl implements ProtoProperty {
 
-  ProtoPropertyImpl(Function<Object, Data> dataGetter, Object valueSetter, Object valueGetter) {
+  ProtoPropertyImpl(Function<Object, Data> dataGetter, Object valueSetter,
+      Object valueGetter, List<Type> typeArgs) {
     _dataGetter = dataGetter;
 
     _valueSetter = valueSetter;
     _valueGetter = valueGetter;
+
+    _typeArgs = typeArgs;
   }
 
   @Override
@@ -31,12 +34,15 @@ final class ProtoPropertyImpl implements ProtoProperty {
     return (T) _valueGetter;
   }
 
-  public List<Class<?>> getTypeArgs() {
-    throw new NO_IMPLEMENT("getTypeArgs尚未实现");
+  @Override
+  public List<Type> getTypeArgs() {
+    return _typeArgs;
   }
 
   private final Function<Object, Data> _dataGetter;
 
   private final Object _valueSetter;
   private final Object _valueGetter;
+
+  private final List<Type> _typeArgs;
 }

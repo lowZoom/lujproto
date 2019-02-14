@@ -1,5 +1,6 @@
 package luj.proto.internal.meta.property;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import luj.data.type.impl.Data;
 
@@ -11,5 +12,5 @@ public interface ProtoProperty {
 
   <T> T getValueGetter();
 
-  List<Class<?>> getTypeArgs();
+  List<Type> getTypeArgs();
 }

@@ -14,4 +14,6 @@ public interface ProtoTypeGetter {
   String getStr(JStr str);
 
   <T> T getRef(JRef<T> ref);
+
+  <T> T getOrNewRef(JRef<T> ref);
 }

@@ -23,7 +23,7 @@ final class ProtoListSetterImpl implements ProtoListSetter {
     }
 
     ProtoListImpl newImpl = createListImpl(list);
-    _fieldOp.setTypeImpl(newImpl);
+    _fieldOp.setTypeImpl(list, newImpl);
     return newImpl;
   }
 

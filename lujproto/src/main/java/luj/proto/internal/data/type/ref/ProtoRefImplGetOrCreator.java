@@ -17,21 +17,18 @@ final class ProtoRefImplGetOrCreator {
       return oldImpl;
     }
 
-    //TODO: 要先把class搞进ref里
     ProtoRefImpl newImpl = createRefImpl(ref, metaMap);
-    _fieldOp.setTypeImpl(newImpl);
+    _fieldOp.setTypeImpl(ref, newImpl);
     return newImpl;
   }
 
-  /**
-   * @see luj.proto.internal.data.type.str.ProtoStrImplGetOrCreator#createStrImpl
-   */
   private ProtoRefImpl createRefImpl(JRef<?> ref, ProtoMetaMap metaMap) {
     ProtoProperty property = _fieldOp.getProperty(ref);
-    Class<?> refType = property.getTypeArgs().get(0);
-
+    Class<?> refType = (Class<?>) property.getTypeArgs().get(0);
     ProtoMeta refMeta = metaMap.get(refType);
-    return new ProtoRefImpl(refMeta);
+
+    return new ProtoRefImpl(refMeta, _fieldOp.getProtoState(ref),
+        property.getValueSetter(), property.getValueGetter());
   }
 
   @Autowired

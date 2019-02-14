@@ -46,7 +46,7 @@ class ProtoPropGeneratorImpl implements ProtoPropGenerator {
         .returns(Object[])
         .addCode('return new $T[]{\n', Object)
         .addCode('$T.getter($T::$L),\n', ProtoPropertyList, protoClass, field.name)
-        .addCode('$T.setter($T::set$L, $T::get$L),\n', ProtoPropertyList, stateType, fieldNameCap, stateType, fieldNameCap)
+        .addCode('$T.setter($T::set$L, $L),\n', ProtoPropertyList, stateType, fieldNameCap, field.stateSetterLocator)
         .addCode('$T.getter($T::get$L),\n', ProtoPropertyList, stateType.enclosingClassName(), fieldNameCap)
         .addStatement('}')
         .build()
@@ -66,6 +66,8 @@ class ProtoPropGeneratorImpl implements ProtoPropGenerator {
   interface ProtoField {
 
     String getName()
+
+    String getStateSetterLocator()
   }
 
   interface ClassSaver {

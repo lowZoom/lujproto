@@ -14,8 +14,8 @@ final class ProtoFieldOpImpl implements ProtoFieldOp {
   }
 
   @Override
-  public void setTypeImpl(Object typeImpl) {
-
+  public void setTypeImpl(Data fieldData, Object typeImpl) {
+    getFieldImpl(fieldData).setTypeImpl(typeImpl);
   }
 
   @SuppressWarnings("unchecked")

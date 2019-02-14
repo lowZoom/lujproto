@@ -29,7 +29,7 @@ class ProtoTypeImpl2 implements ProtoPropGeneratorImpl.ProtoType, ProtoPropGener
 
   @Override
   List<ProtoPropGeneratorImpl.ProtoField> getFieldList() {
-    return _proto.fieldList.collect { new ProtoFieldImpl2(it) }
+    return _proto.fieldList.collect { new ProtoFieldImpl2(it, _stateType) }
   }
 
   @Override
