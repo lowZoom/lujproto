@@ -5,6 +5,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujava/lujava/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujparent/lujparent/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lugparent/lugparent/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lugbuild/lugbuild/pom.xml" />
       </list>
     </option>
   </component>
