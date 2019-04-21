@@ -1,4 +1,4 @@
-package build.git
+package init.build.git
 
 import core.AutoCtor
 
@@ -10,8 +10,8 @@ class AllModuleCloner {
     String projRoot = buildGit.parentFile.absolutePath
 
     new AntBuilder().with {
-      exec(executable: 'git', failonerror: 'true') {
-        arg(value: "--version")
+      exec(executable: 'git', failonerror: true) {
+        arg(value: '--version')
       }
     }
 

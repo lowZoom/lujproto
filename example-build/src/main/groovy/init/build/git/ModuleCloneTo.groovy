@@ -1,9 +1,9 @@
-package build.git
+package init.build.git
 
-import build.git.cmd.GitCmd
 import core.AutoCtor
 import core.ant.AntCmd
 import groovy.transform.PackageScope
+import init.build.git.cmd.GitCmd
 
 import java.nio.file.Files
 import java.nio.file.Paths

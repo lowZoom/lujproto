@@ -1,4 +1,4 @@
-package build.git
+package init.build.git
 
 import core.AutoCtor
 import groovy.transform.PackageScope

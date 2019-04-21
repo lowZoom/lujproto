@@ -1,8 +1,8 @@
-package build
+package init.build
 
-import build.clean.BuildEnvCleaner
-import build.git.AllModuleCloner
 import core.AutoCtor
+import init.build.clean.BuildEnvCleaner
+import init.build.git.AllModuleCloner
 
 @AutoCtor
 class ProjDevBuilder {

@@ -1,4 +1,4 @@
-package build.git.cmd
+package init.build.git.cmd
 
 class GitCmd {
 
