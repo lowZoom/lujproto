@@ -1,5 +1,7 @@
 package luj.proto.internal.session;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.io.IOException;
 import java.util.List;
 import luj.data.type.JList;
@@ -59,6 +61,7 @@ final class ProtoSessionImpl implements ProtoSession {
 
   @Override
   public <T> T decode(byte[] data, Class<T> protoType) throws IOException {
+    checkNotNull(protoType);
     return _protoObjectDecoder.decode(data, protoType);
   }
 
