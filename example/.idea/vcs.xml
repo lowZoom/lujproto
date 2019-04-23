@@ -6,6 +6,7 @@
     </profile>
   </component>
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../../lugparent" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../lujava" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../lujdata" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../lujgenerate" vcs="Git" />

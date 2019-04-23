@@ -18,6 +18,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="example" target="1.8" />
+      <module name="luj.lugparent" target="1.8" />
       <module name="luj.lujava" target="1.8" />
       <module name="luj.lujdata" target="1.8" />
       <module name="luj.lujgenerate" target="1.8" />
