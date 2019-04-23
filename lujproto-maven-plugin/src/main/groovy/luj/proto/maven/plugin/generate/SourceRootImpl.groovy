@@ -3,7 +3,6 @@ package luj.proto.maven.plugin.generate
 import com.github.javaparser.JavaParser
 import com.squareup.javapoet.ClassName
 import groovy.transform.PackageScope
-import luj.proto.anno.Proto
 import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.dotproto.compile.ProtoFileCompiler
 import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
@@ -23,8 +22,9 @@ import static com.google.common.io.Files.getNameWithoutExtension
 @PackageScope
 class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
 
-  SourceRootImpl(MavenHelper maven) {
+  SourceRootImpl(MavenHelper maven, Class annoType) {
     _maven = maven
+    _annoType = annoType
   }
 
   @Override
@@ -34,7 +34,7 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
         .collect { it.types }
         .findAll { it.size() == 1 }
         .collect { it[0] }
-        .findAll { it.getAnnotationByClass(Proto).isPresent() }
+        .findAll { it.getAnnotationByClass(_annoType).isPresent() }
         .collect { new ProtoTypeImpl(it, _maven) }
   }
 
@@ -82,4 +82,6 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
   }
 
   private final MavenHelper _maven
+
+  private final Class _annoType
 }
