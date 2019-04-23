@@ -22,9 +22,11 @@ import static com.google.common.io.Files.getNameWithoutExtension
 @PackageScope
 class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
 
-  SourceRootImpl(MavenHelper maven, Class annoType) {
+  SourceRootImpl(MavenHelper maven, Class annoType, Path envProtoc) {
     _maven = maven
+
     _annoType = annoType
+    _envProtoc = envProtoc
   }
 
   @Override
@@ -47,7 +49,7 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
   void generateAll(List<ProtoAllGeneratorImpl.ProtoType> protoList) {
     _maven.addCompileSourceRoot(_maven.path.targetGeneratedsourcesLujproto)
 
-    Path protocPath = ProtocFindOrInstaller.Factory.create(_maven).findOrInstall()
+    Path protocPath = _envProtoc ?: ProtocFindOrInstaller.Factory.create(_maven).findOrInstall()
     Map<String, DotProtoCollector.Proto> protoMap = DotProtoCollector.Factory
         .create(protoList.collect { it.declaration }, protocPath, _maven)
         .collect()
@@ -84,4 +86,5 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
   private final MavenHelper _maven
 
   private final Class _annoType
+  private final Path _envProtoc
 }

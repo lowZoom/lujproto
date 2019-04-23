@@ -22,7 +22,8 @@ final class ProtocMojo extends AbstractMojo {
 //    ProtoCompiler compiler = ProtoCompiler.Factory.create(project);
 //    compiler.compile();
 
-    ProtoAllGenerator generator = ProtoAllGenerator.Factory.create(project, Proto.class, getLog());
-    generator.generate();
+    ProtoAllGenerator.Factory
+        .create(Proto.class, project, null, getLog())
+        .generate();
   }
 }
