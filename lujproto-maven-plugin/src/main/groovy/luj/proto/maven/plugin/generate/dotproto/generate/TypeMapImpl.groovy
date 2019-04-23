@@ -1,6 +1,7 @@
 package luj.proto.maven.plugin.generate.dotproto.generate
 
 import groovy.transform.PackageScope
+import luj.data.type.JInt
 import luj.data.type.JStr
 
 @PackageScope
@@ -17,5 +18,6 @@ class TypeMapImpl implements ProtoFieldImpl.TypeMap, ProtoFieldImpl2.TypeMap, Pr
 
   private static final Map SCALAR_MAP = [
       (key(JStr)): 'string',
+      (key(JInt)): 'int32',
   ]
 }

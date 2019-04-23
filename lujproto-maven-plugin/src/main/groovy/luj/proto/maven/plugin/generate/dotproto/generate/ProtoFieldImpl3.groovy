@@ -29,7 +29,7 @@ class ProtoFieldImpl3 implements DotProtoFileGeneratorImpl.ProtoField {
       return toObjectType(TypeFullNameResolver.Factory.create(paramType, _protoMap).resolve())
     }
 
-    assert false: '不支持的字段类型：' + fieldType
+    throw new UnsupportedOperationException("不支持的字段类型：$fieldType")
   }
 
   @Override
