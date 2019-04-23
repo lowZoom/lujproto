@@ -3,6 +3,7 @@ package luj.proto.maven.plugin.generate
 import com.github.javaparser.JavaParser
 import com.squareup.javapoet.ClassName
 import groovy.transform.PackageScope
+import luj.proto.maven.plugin.export.proto.ProtoOutExporter
 import luj.proto.maven.plugin.generate.dotproto.collect.DotProtoCollector
 import luj.proto.maven.plugin.generate.dotproto.compile.ProtoFileCompiler
 import luj.proto.maven.plugin.generate.dotproto.generate.DotProtoFileGenerator
@@ -22,11 +23,12 @@ import static com.google.common.io.Files.getNameWithoutExtension
 @PackageScope
 class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
 
-  SourceRootImpl(MavenHelper maven, Class annoType, Path envProtoc) {
+  SourceRootImpl(MavenHelper maven, Class annoType, Path envProtoc, File protoOut) {
     _maven = maven
-
     _annoType = annoType
+
     _envProtoc = envProtoc
+    _protoOut = protoOut
   }
 
   @Override
@@ -66,6 +68,8 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
 
       ProtoCodecGenerator.Factory.create(it, stateType).generate()
     }
+
+    exportProtoFile()
   }
 
   private List<Path> walkSourceRoot() {
@@ -83,8 +87,14 @@ class SourceRootImpl implements ProtoAllGeneratorImpl.SourceRoot {
     return ClassName.get(proto.packageName, "${protoName}OuterClass", protoName, 'Builder')
   }
 
-  private final MavenHelper _maven
+  private void exportProtoFile() {
+    def outPath = _protoOut && _protoOut.isDirectory() ? _protoOut.toPath() : null
+    new ProtoOutExporter(outPath, _maven.path.targetGeneratedsourcesLujproto).export()
+  }
 
+  private final MavenHelper _maven
   private final Class _annoType
+
   private final Path _envProtoc
+  private final File _protoOut
 }
