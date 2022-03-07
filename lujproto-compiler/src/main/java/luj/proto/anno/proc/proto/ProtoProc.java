@@ -8,7 +8,7 @@ import luj.generate.annotation.process.SingleAnnoProc;
 import luj.proto.anno.Proto;
 import luj.proto.anno.proc.proto.meta.ProtoMetaGenerator;
 
-@AutoService(Processor.class)
+//@AutoService(Processor.class)
 public final class ProtoProc extends SingleAnnoProc {
 
   @Override
